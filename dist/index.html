@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripTrove</title>
+    <link rel="stylesheet" type="text/css" href="../src/css/styles.css">
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
-
+    <header>
+        <nav>
+            <h3 class="header-text">TripTrove</h3>
+            <div class="action-buttons">
+              <button class="login-button">Explore</button>
+              <button class="login-button">Book A Trip</button>
+              <button class="login-button">Login</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="welcome-message">
+          <div class="sub-container-text">
+            <h2>Let's take a trip!</h2>
+            <h3>Where do you want to go?</h3>
+          </div>
+        </div>
+        <div class="container">
+            <div class="sub-container1">
+              <h1 class="card-titles">Seychelles</h1>
+              <h2 class="card-price">From $$$</h2>
+              <img src="./images/Beach.jpg" class="vacation-photos" alt="a photo of blue water, peering through a palm tree with a lot of plants">
+            </div>
+            <div class="sub-container2">
+              <h1 class="card-titles">Costa Rica</h1>
+              <h2 class="card-price">From $$$</h2>
+              <img src="./images/Jungle.jpg" class="vacation-photos" alt="a photo of a jungle, with big trees and a dirt path going down the center">
+            </div>
+            <div class="sub-container3">
+              <h1 class="card-titles">Rome</h1>
+              <h2 class="card-price">From $$$</h2>
+              <img src="./images/Rome.jpg" class="vacation-photos" alt="an aerial photo of the collisseum in Rome, Italy, surrounded by a city landscape">
+            </div>
+        </div>
+    </main>
+    <footer>
+      <h4 class="footer-text">TripTrove</h4>
+    </footer>
+    <script src="bundle.js"></script>
 </body>
 </html>
+

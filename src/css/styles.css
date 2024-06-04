@@ -1,4 +1,77 @@
-
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background-color: #FDF1F0;
+  margin: 0;
+}
+
+nav {
+  background-color: white;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 0 20px; 
+}
+
+header {
+  border-top: 20px solid white;
+  border-bottom: 20px solid white;
+  background-color: white; 
+  margin: 0;
+}
+
+.header-text {
+  color: #1B7791;
+  margin: 0;
+}
+
+nav li {
+  color: #1B7791;
+}
+
+.welcome-message {
+  background-color: white;
+}
+
+.welcome-message h2 {
+  color: #FB991A;
+}
+
+.welcome-message h3 {
+  color: gray;
+}
+
+.container {
+  border: 20px solid red;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-titles {
+  text-align: center;
+}
+
+.card-price {
+  padding-left: 30px;
+}
+
+.sub-container-text {
+  text-align: center;
+}
+
+.sub-container1, .sub-container2, .sub-container3 {
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.vacation-photos {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+footer {
+  background-color: white;
+}
+
+.footer-text {
+  color: #1B7791;
 }
