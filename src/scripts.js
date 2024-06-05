@@ -26,9 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Past Trips:', tripDetails.pastTrips);
         console.log('Upcoming Trips:', tripDetails.upcomingTrips);
         console.log('Pending Trips:', tripDetails.pendingTrips);
-        console.log('Total Amount Spent This Year:', tripDetails.totalAmountSpent);
-        
-        updateTotalAmountSpent(tripDetails.totalAmountSpent); // Ensure this matches the import
+        console.log('Total Amount Spent This Year:', tripDetails.totalAmountSpent);        
+        updateTotalAmountSpent(tripDetails.totalAmountSpent); 
       })
       .catch(error => {
         console.error('Error:', error);
