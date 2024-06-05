@@ -17,7 +17,7 @@ const updatePastTrips = (trips) => {
     if (pastTripsElement && trips.length > 0) {
         fetchData('http://localhost:3001/api/v1/destinations')
             .then(data => {
-                console.log('Destinations:', data.destinations); // Debugging statement
+                console.log('Destinations:', data.destinations);
                 const destinations = data.destinations;
                 const tripLocations = trips.map(trip => {
                     const destination = destinations.find(dest => dest.id === trip.destinationID);
