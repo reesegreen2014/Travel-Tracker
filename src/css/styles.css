@@ -121,7 +121,7 @@ header {
   font-size: 25px;
 }
 
-.login-button {
+.book-button {
   background-color: #FB991A;
   font-size: 25px;
   border-radius: 5px;
@@ -129,6 +129,7 @@ header {
   padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
+  cursor: pointer;
 }
 
 footer {
