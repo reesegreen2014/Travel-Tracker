@@ -26,8 +26,11 @@ header {
 .header-text {
   color: #1B7791;
   margin: 0;
-  font-size: 45px;
+  font-size: 60px;
   padding-left: 30px;
+  font-family: "Teko", sans-serif;
+  font-weight: 200px;
+  font-style:oblique;
 }
 
 .welcome-message { 
@@ -35,12 +38,32 @@ header {
 }
 .welcome-message h2 {
   color: #FB991A;
-  font-size: 50px;
+}
+
+.trip-message {
+  font-family: "Shadows Into Light Two", cursive;
+  font-style: normal;
+  font-size: 75px;
+  word-spacing: 20px;
+  position: relative; 
+  display: inline-block;
+}
+
+.trip-message::after {
+  content: '';
+  position: absolute; 
+  bottom: -15px;
+  left: -25%;
+  width: 150%; 
+  height: 5px; 
+  background-color:#1B7791;
+  border-radius: 50%; 
 }
 
 .welcome-message h3 {
   color: gray;
-  font-size: 25px;
+  font-size: 35px;
+  margin: 0;
 }
 
 .container {
@@ -120,6 +143,10 @@ footer {
   color: #1B7791;
   font-size: 50px;
   padding-left: 30px;
+  font-family: "Teko", sans-serif;
+  font-weight: 200px;
+  font-style:oblique;
+  font-size: 60px;
 }
 
 .card-DOMUpdates {
