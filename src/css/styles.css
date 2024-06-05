@@ -55,6 +55,7 @@ header {
 .card-titles {
   text-align: center;
   color:#FB991A;
+  font-size: 40px;
 }
 
 .sub-container-text {
@@ -62,8 +63,8 @@ header {
 }
 
 .sub-container1, .sub-container2, .sub-container3, .sub-container4 {
-  width: 300px;
-  height: 500px;
+  width: 500px;
+  height: 700px;
   background-color: white;
   margin-bottom: 20px;
   border: solid;
@@ -78,8 +79,8 @@ header {
 }
 
 .vacation-photos {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   border: 5px solid #FB991A;
 }
@@ -118,4 +119,20 @@ footer {
   color: #1B7791;
   font-size: 50px;
   padding-left: 30px;
+}
+
+.sub-container2 .card-DOMUpdates ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.sub-container2 .card-DOMUpdates li {
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }

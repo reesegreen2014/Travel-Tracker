@@ -16,7 +16,7 @@ console.log('This is the JavaScript entry file - your code begins here.');
 
 
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateTotalAmountSpent } from './domUpdates/domUpdates';
+import { updateTotalAmountSpent, updatePastTrips } from './domUpdates/domUpdates';
 
 const travelerId = 10; 
 
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Pending Trips:', tripDetails.pendingTrips);
         console.log('Total Amount Spent This Year:', tripDetails.totalAmountSpent);        
         updateTotalAmountSpent(tripDetails.totalAmountSpent); 
+        updatePastTrips(tripDetails.pastTrips)
       })
       .catch(error => {
         console.error('Error:', error);

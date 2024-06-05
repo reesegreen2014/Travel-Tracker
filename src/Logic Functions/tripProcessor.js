@@ -25,7 +25,7 @@ const filterTripsByTraveler = (trips, travelerId) => {
 
 const categorizeTrips = (trips) => {
   const currentDate = new Date();
-  const pastTrips = [];
+  const pastTrips = trips.filter(trip => new Date(trip.date) < currentDate)
   const upcomingTrips = [];
   const pendingTrips = [];
 
@@ -92,4 +92,4 @@ const getTripDetailsForTraveler = (travelerId) => {
     });
 }
 
-export { getTripDetailsForTraveler, calculateTotalAmountSpent };
+export { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips };
