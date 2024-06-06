@@ -43,7 +43,7 @@ header {
 .trip-message {
   font-family: "Shadows Into Light Two", cursive;
   font-style: normal;
-  font-size: 75px;
+  font-size: 30px;
   word-spacing: 20px;
   position: relative; 
   display: inline-block;
@@ -62,23 +62,23 @@ header {
 
 .welcome-message h3 {
   color: gray;
-  font-size: 35px;
+  font-size: 20px;
   margin: 0;
 }
 
 .container {
-  border: #1B7791 5px solid;
+  border: #1B7791 3px solid;
   display: flex;
   justify-content: space-around;
   padding: 50px;
-  margin: 30px;
+  margin: 100px;
   border-radius: 20px;
 }
 
 .card-titles {
   text-align: center;
   color:#FB991A;
-  font-size: 40px;
+  font-size: 20px;
   margin-bottom: 0;
 }
 
@@ -87,8 +87,8 @@ header {
 }
 
 .sub-container1, .sub-container2, .sub-container3, .sub-container4 {
-  width: 500px;
-  height: 700px;
+  width: 200px;
+  height: 300px;
   background-color: white;
   margin-bottom: 20px;
   border: solid;
@@ -103,8 +103,8 @@ header {
 }
 
 .vacation-photos {
-  width: 250px;
-  height: 250px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   border: 5px solid #FB991A;
 }
@@ -138,6 +138,15 @@ footer {
   height: 150px;
   display: flex;
   align-items: center;
+}
+
+.past-trip-text {
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+.API-location {
+  font-size: 15px;
 }
 
 .footer-text {

@@ -23,9 +23,9 @@ const updatePastTrips = (trips) => {
                     const destination = destinations.find(dest => dest.id === trip.destinationID);
                     return destination ? destination.destination : 'Unknown';
                 });
-                const listItems = tripLocations.map(location => `<li>${location}</li>`).join('');
+                const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
                 const list = `<ul>${listItems}</ul>`;
-                pastTripsElement.innerHTML = `<h3>Your past trips were to:</h3> ${list}`;
+                pastTripsElement.innerHTML = `<h3 class="past-trip-text">Your past trips were to:</h3> ${list}`;
             })
             .catch(error => {
                 console.error('Error fetching destinations, please try again later:', error);
