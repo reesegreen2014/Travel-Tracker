@@ -114,14 +114,18 @@ header {
   gap: 50px;
 }
 
-.action-button { 
-  background: transparent;
-  border: none;
-  color:#022539;
+.nav-book-button { 
+  background-color: #FB991A;
   font-size: 25px;
+  border-radius: 5px;
+  color:#022539;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
 }
 
-.book-button {
+.nav-login-button {
   background-color: #FB991A;
   font-size: 25px;
   border-radius: 5px;

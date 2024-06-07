@@ -13,8 +13,8 @@
         <nav>
             <h3 class="header-text">TripTrove</h3>
             <div class="action-buttons">
-              <button class="action-button">Explore</button>
-              <button class="book-button">Book A Trip</button>
+              <button class="nav-book-button">Book A Trip!</button>
+              <button class="nav-login-button">Login</button>
             </div>
         </nav>
     </header>
@@ -28,21 +28,21 @@
         <div class="container">
             <div class="sub-container1">
               <h1 class="card-titles">Upcoming Trips</h1>
-              <h2 class="card-DOMUpdates"></h2>
+              <h2 class="card-DOMUpdates">Login to see your upcoming trips!</h2>
               <img src="./images/Beach.jpg" class="vacation-photos" alt="a photo of blue water, peering through a palm tree with a lot of plants">
             </div>
             <div class="sub-container2">
               <h1 class="card-titles">Past Trips</h1>
-              <h2 class="card-DOMUpdates"></h2>
+              <h2 class="card-DOMUpdates">Login to see your past trips!</h2>
               <!-- <img src="./images/Jungle.jpg" class="vacation-photos" alt="a photo of a jungle, with big trees and a dirt path going down the center"> -->
             </div>
             <div class="sub-container3">
               <h1 class="card-titles">Pending Trips</h1>
-              <h2 class="card-DOMUpdates"></h2>
+              <h2 class="card-DOMUpdates">Login to see your pending trips!</h2>
             </div>
             <div class="sub-container4">
               <h1 class="card-titles">Money Spent</h1>
-              <h2 class="card-DOMUpdates"></h2>
+              <h2 class="card-DOMUpdates">Login to see how much you've spent this year on trips!</h2>
               <img src="./images/Money.jpg" class="vacation-photos" alt="photo with American dollar bills">
             </div>
         </div>
@@ -53,17 +53,17 @@
     <div id="loginForm" class="login-form-hidden">
       <h2>Let's Travel! Login Below.</h2>
       <form id="loginForm" action="login_process.php" method="post">
-          <div class="form-group">
-              <label for="username">Username:</label>
-              <input type="text" id="username" name="username" required>
-          </div>
-          <div class="form-group">
-              <label for="password">Password:</label>
-              <input type="password" id="password" name="password" required>
-          </div>
-          <button type="submit" class="login-button">Login</button>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="sub-menu-login-button">Login</button>
       </form>
-  </div>
+    </div>
     <script src="bundle.js"></script>
     <script src="scripts.js"></script>
     <script src="tripProcess.js"></script>

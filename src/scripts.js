@@ -16,32 +16,45 @@ console.log('This is the JavaScript entry file - your code begins here.');
 
 import { fetchData } from './APICalls';
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateTotalAmountSpent, updatePastTrips } from './domUpdates/domUpdates';
+import { updateTotalAmountSpent, updatePastTrips, showLoginForm } from './domUpdates/domUpdates';
 
 const travelerId = 10; 
 const baseUrl = 'http://localhost:3001/api/v1'
 
 document.addEventListener('DOMContentLoaded', () => {
-  Promise.all([
-    fetchData(`${baseUrl}/trips`),
-    fetchData(`${baseUrl}/destinations`),
-    fetchData(`${baseUrl}/travelers`)
-  ])
-  .then(([tripsData, destinationsData]) => {
-    const trips = tripsData.trips || [];
-    const destinations = destinationsData.destinations || [];
-
-    const tripDetails = getTripDetailsForTraveler(travelerId, trips, destinations);
-
-    if (tripDetails) {
-      updateTotalAmountSpent(tripDetails.totalAmountSpent);
-      updatePastTrips(tripDetails.pastTrips, destinations); 
-    }
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
+  showLoginForm();
+  const loginForm = document.getElementById('loginForm');
+  loginForm.addEventListener('submit', handleFormSubmission);
 });
+
+const handleFormSubmission = (event) => {
+  event.preventDefault(); 
+
+  fetchData(`${baseUrl}/trips`)
+    .then(tripsData => {
+      return Promise.all([
+        tripsData,
+        fetchData(`${baseUrl}/destinations`),
+        fetchData(`${baseUrl}/travelers`)
+      ]);
+    })
+    .then(([tripsData, destinationsData]) => {
+      const trips = tripsData.trips || [];
+      const destinations = destinationsData.destinations || [];
+
+      const tripDetails = getTripDetailsForTraveler(travelerId, trips, destinations);
+
+      if (tripDetails) {
+        updateTotalAmountSpent(tripDetails.totalAmountSpent);
+        updatePastTrips(tripDetails.pastTrips, destinations); 
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+};
+
+
 
 
 
