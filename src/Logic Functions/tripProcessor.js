@@ -1,31 +1,11 @@
-import { fetchData } from "../APICalls";
-
-const baseUrl = 'http://localhost:3001/api/v1';
-
-const fetchAllTrips = () => {
-  return fetchData(`${baseUrl}/trips`)
-  .then(data => data.trips);
-}
-
-const fetchAllDestinations = () => {
-  return fetchData(`${baseUrl}/destinations`)
-  .then(data => data.destinations);
-}
-
-const fetchAllTravelers = () => {
-  return fetchData(`${baseUrl}/travelers`)
-  .then(data => data.travelers);
-}
-
-
 //LOGIC FUNCTIONS 
-const filterTripsByTraveler = (trips, travelerId) => {
+const filterTripsByTraveler = (trips = [], travelerId) => {
   return trips.filter(trip => trip.userID === travelerId);
 }
 
-const categorizeTrips = (trips) => {
+const categorizeTrips = (trips = []) => {
   const currentDate = new Date();
-  const pastTrips = trips.filter(trip => new Date(trip.date) < currentDate)
+  const pastTrips = trips.filter(trip => new Date(trip.date) < currentDate);
   const upcomingTrips = [];
   const pendingTrips = [];
 
@@ -33,9 +13,7 @@ const categorizeTrips = (trips) => {
     const tripDate = new Date(trip.date);
     if (trip.status === 'pending') {
       pendingTrips.push(trip);
-    } else if (tripDate < currentDate) {
-      pastTrips.push(trip);
-    } else {
+    } else if (tripDate >= currentDate) {
       upcomingTrips.push(trip);
     }
   });
@@ -43,53 +21,49 @@ const categorizeTrips = (trips) => {
   return { pastTrips, upcomingTrips, pendingTrips };
 }
 
-const calculateTotalAmountSpent = (pastTrips, destinations, currentYear) => {
+
+const calculateTotalAmountSpent = (pastTrips = [], destinations = [], currentYear) => {
   const agentFee = 0.10;
   let totalAmountSpent = 0;
 
-  console.log('Current Year:', currentYear);
-  console.log('Past Trips:', pastTrips);
+  console.log("Past Trips:", pastTrips);
+  console.log("Destinations:", destinations);
+  console.log("Current Year:", currentYear);
 
   pastTrips.forEach(trip => {
     const tripDate = new Date(trip.date);
     const tripYear = tripDate.getFullYear();
-    console.log('Trip Date:', tripDate, 'Trip Year:', tripYear);
 
     if (tripYear === currentYear) {
       const destination = destinations.find(dest => dest.id === trip.destinationID);
-      console.log('Destination:', destination);
+      console.log("Trip:", trip);
+      console.log("Destination:", destination);
 
       if (destination) {
         const tripCost = (destination.estimatedLodgingCostPerDay * trip.duration) + (destination.estimatedFlightCostPerPerson * trip.travelers);
-        console.log('Trip Cost:', tripCost);
         totalAmountSpent += tripCost + (tripCost * agentFee);
-      } else {
-        console.log(`Destination not found for ID: ${trip.destinationID}`);
       }
     }
   });
 
-  console.log('Total Amount Spent:', totalAmountSpent);
+  console.log("Total Amount Spent:", totalAmountSpent);
   return totalAmountSpent;
 }
 
+const getTripDetailsForTraveler = (travelerId, trips = [], destinations = [], currentYear = 2020) => {
+  try {
+    const travelerTrips = filterTripsByTraveler(trips, travelerId);
+    const categorizedTrips = categorizeTrips(travelerTrips);
+    const totalAmountSpent = calculateTotalAmountSpent(categorizedTrips.pastTrips, destinations, currentYear);
 
-const getTripDetailsForTraveler = (travelerId) => {
-  return Promise.all([fetchAllTrips(), fetchAllDestinations(), fetchAllTravelers()])
-    .then(([trips, destinations]) => {
-      const travelerTrips = filterTripsByTraveler(trips, travelerId);
-      const categorizedTrips = categorizeTrips(travelerTrips);
-      const currentYear = 2020;
-      const totalAmountSpent = calculateTotalAmountSpent(categorizedTrips.pastTrips, destinations, currentYear);
-
-      return {
-        ...categorizedTrips,
-        totalAmountSpent
-      };
-    })
-    .catch(error => {
-      console.error('Error getting trip details:', error);
-    });
+    return {
+      ...categorizedTrips,
+      totalAmountSpent
+    };
+  } catch (error) {
+    console.error('Error getting trip details:', error);
+    return null;
+  }
 }
 
 export { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips };

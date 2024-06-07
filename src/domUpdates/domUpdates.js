@@ -12,28 +12,22 @@ const updateTotalAmountSpent = (amount) => {
     }
 }
 
-const updatePastTrips = (trips) => {
-    console.log('Trips:', trips); 
-    if (pastTripsElement && trips.length > 0) {
-        fetchData('http://localhost:3001/api/v1/destinations')
-            .then(data => {
-                console.log('Destinations:', data.destinations);
-                const destinations = data.destinations;
-                const tripLocations = trips.map(trip => {
-                    const destination = destinations.find(dest => dest.id === trip.destinationID);
-                    return destination ? destination.destination : 'Unknown';
-                });
-                const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
-                const list = `<ul>${listItems}</ul>`;
-                pastTripsElement.innerHTML = `<h3 class="past-trip-text">Your past trips were to:</h3> ${list}`;
-            })
-            .catch(error => {
-                console.error('Error fetching destinations, please try again later:', error);
-            });
-    } else {
+const updatePastTrips = (trips = [], destinations = []) => {
+    if (pastTripsElement) {
+      if (trips.length > 0) {
+        const tripLocations = trips.map(trip => {
+          const destination = destinations.find(dest => dest.id === trip.destinationID);
+          return destination ? destination.destination : 'Unknown';
+        });
+        const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
+        const list = `<ul>${listItems}</ul>`;
+        pastTripsElement.innerHTML = `<h3 class="past-trip-text">Your past trips were to:</h3> ${list}`;
+      } else {
         pastTripsElement.innerHTML = 'No past trips recorded.';
+      }
     }
 }
+
 
 export { updateTotalAmountSpent, updatePastTrips }
 
