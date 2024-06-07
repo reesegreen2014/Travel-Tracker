@@ -26,8 +26,8 @@ header {
 .header-text {
   color: #1B7791;
   margin: 0;
-  font-size: 60px;
-  padding-left: 30px;
+  font-size: 45px;
+  padding-left: 10px;
   font-family: "Teko", sans-serif;
   font-weight: 200px;
   font-style:oblique;
@@ -136,10 +136,39 @@ header {
   cursor: pointer;
 }
 
+#loginForm {
+  background-color: white;
+  border-radius: 10px;
+  padding: 18px;
+
+  h2 {
+    color:#1B7791;
+  }
+}
+
+.login-form-hidden {
+  display: none; 
+  position: absolute; 
+  margin-top: 60px;
+  top: 60px; 
+  right: 0; 
+}
+
+.sub-menu-login-button { 
+  background-color: #FB991A;
+  margin-top: 5px;
+  font-size: 25px;
+  border-radius: 10%;
+}
+
+.form-group {
+  color: #022539;
+}
+
 footer {
   background-color: white;
   padding: 20px;
-  height: 150px;
+  height: 100px;
   display: flex;
   align-items: center;
 }
@@ -155,12 +184,12 @@ footer {
 
 .footer-text {
   color: #1B7791;
-  font-size: 50px;
-  padding-left: 30px;
+  margin: 0;
+  font-size: 45px;
+  padding-left: 10px;
   font-family: "Teko", sans-serif;
   font-weight: 200px;
   font-style:oblique;
-  font-size: 60px;
 }
 
 .login-form-hidden {

@@ -30,7 +30,7 @@ const updatePastTrips = (trips = [], destinations = []) => {
 
 const showLoginForm = () => {
   const loginForm = document.getElementById('loginForm');
-  loginForm.classList.remove("hidden")
+  loginForm.classList.remove("login-form-hidden"); 
 }
 
 

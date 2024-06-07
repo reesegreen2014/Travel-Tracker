@@ -54,7 +54,13 @@ const handleFormSubmission = (event) => {
     });
 };
 
+document.addEventListener('DOMContentLoaded', () => {
+  const loginButton = document.querySelector('.nav-login-button'); 
 
-
+  loginButton.addEventListener('click', () => {
+    const loginForm = document.getElementById('loginForm');
+    loginForm.classList.toggle('login-form-hidden'); 
+  });
+});
 
 
