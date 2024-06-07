@@ -34,13 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tripDetails = getTripDetailsForTraveler(travelerId, trips, destinations);
 
     if (tripDetails) {
-      console.log('Past Trips:', tripDetails.pastTrips);
-      console.log('Upcoming Trips:', tripDetails.upcomingTrips);
-      console.log('Pending Trips:', tripDetails.pendingTrips);
-      console.log('Total Amount Spent This Year:', tripDetails.totalAmountSpent);
-
       updateTotalAmountSpent(tripDetails.totalAmountSpent);
-      updatePastTrips(tripDetails.pastTrips, destinations); // Pass destinations here
+      updatePastTrips(tripDetails.pastTrips, destinations); 
     }
   })
   .catch(error => {
