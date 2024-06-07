@@ -28,6 +28,11 @@ const updatePastTrips = (trips = [], destinations = []) => {
     }
 }
 
+const showLoginForm = () => {
+  const loginForm = document.getElementById('loginForm');
+  loginForm.classList.remove("hidden")
+}
 
-export { updateTotalAmountSpent, updatePastTrips }
+
+export { updateTotalAmountSpent, updatePastTrips, showLoginForm }
 
