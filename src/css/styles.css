@@ -29,8 +29,8 @@ header {
   font-size: 45px;
   padding-left: 10px;
   font-family: "Teko", sans-serif;
-  font-weight: 200px;
-  font-style:oblique;
+  font-weight: 200;
+  font-style: oblique;
 }
 
 .welcome-message { 
@@ -137,21 +137,23 @@ header {
 }
 
 #loginForm {
-  background-color: white;
-  border-radius: 10px;
-  padding: 18px;
-
-  h2 {
-    color:#1B7791;
-  }
-}
-
-.login-form-hidden {
-  display: none; 
   position: absolute; 
   margin-top: 60px;
   top: 60px; 
   right: 0; 
+  background-color: white;
+  border-radius: 10px;
+  padding: 18px;
+  border: 2px solid orange;
+  width: 175px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+h2 {
+  color:#1B7791;
 }
 
 .sub-menu-login-button { 
@@ -188,19 +190,12 @@ footer {
   font-size: 45px;
   padding-left: 10px;
   font-family: "Teko", sans-serif;
-  font-weight: 200px;
-  font-style:oblique;
+  font-weight: 200;
+  font-style: oblique;
 }
 
 .login-form-hidden {
-  border: 2px solid orange;
-  border-width: 2px;
-  width: 175px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  display: none; 
 }
 
 .form-group {

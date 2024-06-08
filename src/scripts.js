@@ -22,9 +22,15 @@ const travelerId = 10;
 const baseUrl = 'http://localhost:3001/api/v1'
 
 document.addEventListener('DOMContentLoaded', () => {
-  showLoginForm();
+  const loginButton = document.getElementById('loginButton'); 
   const loginForm = document.getElementById('loginForm');
-  loginForm.addEventListener('submit', handleFormSubmission);
+
+  loginButton.addEventListener('click', () => {
+    loginForm.classList.toggle('login-form-hidden'); // Use toggle to add/remove the class
+  });
+
+  const loginFormInner = document.getElementById('loginFormInner');
+  loginFormInner.addEventListener('submit', handleFormSubmission); // Corrected the form's event listener to use the inner form
 });
 
 const handleFormSubmission = (event) => {
@@ -54,13 +60,6 @@ const handleFormSubmission = (event) => {
     });
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  const loginButton = document.querySelector('.nav-login-button'); 
 
-  loginButton.addEventListener('click', () => {
-    const loginForm = document.getElementById('loginForm');
-    loginForm.classList.toggle('login-form-hidden'); 
-  });
-});
 
 
