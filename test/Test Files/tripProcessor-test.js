@@ -5,10 +5,6 @@ const { testData } = require('../Datasets for Tests/tripProcessor-data');
 
 describe('Trip Processor Functions', () => {
   const { travelers, trips, destinations } = testData;
-  console.log({travelers, trips, destinations});
-
-
-
   describe('getTripDetailsForTraveler', () => {
     it('should be a function', () => {
       expect(getTripDetailsForTraveler).to.be.a('function');

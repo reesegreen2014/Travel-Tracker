@@ -7,6 +7,7 @@ const totalAmountSpentElement = document.querySelector('.sub-container4 .card-DO
 const pastTripsElement = document.querySelector('.sub-container2 .card-DOMUpdates')
 
 const updateTotalAmountSpent = (amount) => {
+    console.log(amount)
     if (totalAmountSpentElement) {
         totalAmountSpentElement.innerHTML = `You have spent $${amount.toFixed(2)} on trips this year!`;
     }
@@ -33,6 +34,10 @@ const showLoginForm = () => {
   loginForm.classList.remove("login-form-hidden"); 
 }
 
+const hideLoginForm = () => {
+  const loginForm = document.getElementById('loginForm');
+  loginForm.classList.add("login-form-hidden");
+};
 
-export { updateTotalAmountSpent, updatePastTrips, showLoginForm }
+export { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm }
 

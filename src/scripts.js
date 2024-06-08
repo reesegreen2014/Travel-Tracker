@@ -11,55 +11,62 @@ import './images/Jungle.jpg'
 import './images/Rome.jpg'
 import './images/Money.jpg'
 import './APICalls'
-
-console.log('This is the JavaScript entry file - your code begins here.');
-
 import { fetchData } from './APICalls';
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateTotalAmountSpent, updatePastTrips, showLoginForm } from './domUpdates/domUpdates';
+import { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm } from './domUpdates/domUpdates';
+import { validateCredentials, extractTravelerId } from './Logic Functions/loginFunctions';
 
-const travelerId = 10; 
 const baseUrl = 'http://localhost:3001/api/v1'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const loginButton = document.getElementById('loginButton'); 
-  const loginForm = document.getElementById('loginForm');
+  const loginButton = document.getElementById('loginButton');
+  const loginFormInner = document.getElementById('loginFormInner');
 
   loginButton.addEventListener('click', () => {
-    loginForm.classList.toggle('login-form-hidden'); // Use toggle to add/remove the class
+      showLoginForm();
   });
 
-  const loginFormInner = document.getElementById('loginFormInner');
-  loginFormInner.addEventListener('submit', handleFormSubmission); // Corrected the form's event listener to use the inner form
+  loginFormInner.addEventListener('submit', handleFormSubmission);
 });
 
 const handleFormSubmission = (event) => {
-  event.preventDefault(); 
+  event.preventDefault();
 
-  fetchData(`${baseUrl}/trips`)
-    .then(tripsData => {
-      return Promise.all([
-        tripsData,
-        fetchData(`${baseUrl}/destinations`),
-        fetchData(`${baseUrl}/travelers`)
-      ]);
-    })
-    .then(([tripsData, destinationsData]) => {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (validateCredentials(username, password)) {
+      const travelerId = extractTravelerId(username);
+      fetchUserData(travelerId);
+  } else {
+      alert('Invalid username or password');
+  }
+};
+
+
+const fetchUserData = (travelerId) => {
+  Promise.all([
+      fetchData(`${baseUrl}/trips`),
+      fetchData(`${baseUrl}/destinations`),
+      fetchData(`${baseUrl}/travelers/${travelerId}`)
+  ])
+  .then(([tripsData, destinationsData, travelerData]) => {
       const trips = tripsData.trips || [];
       const destinations = destinationsData.destinations || [];
 
       const tripDetails = getTripDetailsForTraveler(travelerId, trips, destinations);
 
       if (tripDetails) {
-        updateTotalAmountSpent(tripDetails.totalAmountSpent);
-        updatePastTrips(tripDetails.pastTrips, destinations); 
+          updateTotalAmountSpent(tripDetails.totalAmountSpent);
+          updatePastTrips(tripDetails.pastTrips, destinations);
       }
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
-};
 
+      hideLoginForm();
+  })
+  .catch(error => {
+      console.error('Error fetching data:', error);
+  });
+};
 
 
 
