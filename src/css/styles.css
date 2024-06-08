@@ -220,6 +220,12 @@ footer {
   padding: 2px;
 }
 
+.upcoming-card-DOMUpdates, .pending-card-DOMUpdates {
+  color:#022539;
+  font-size: 18px;
+  padding: 2px;
+}
+
 .sub-container2 .card-DOMUpdates ul {
   list-style-type: none;
   padding: 0;

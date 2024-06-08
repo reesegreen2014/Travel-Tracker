@@ -19,29 +19,57 @@ import { validateCredentials, extractTravelerId } from './Logic Functions/loginF
 const baseUrl = 'http://localhost:3001/api/v1'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const loginButton = document.getElementById('loginButton');
-  const loginFormInner = document.getElementById('loginFormInner');
-
-  loginButton.addEventListener('click', () => {
-      showLoginForm();
+    const loginButton = document.getElementById('loginButton');
+    const loginFormInner = document.getElementById('loginFormInner');
+  
+    loginButton.addEventListener('click', () => {
+        const isLoggedIn = loginButton.innerText === 'Logout';
+        if (isLoggedIn) {
+            handleLogout();
+        } else {
+            showLoginForm();
+        }
+    });
+  
+    loginFormInner.addEventListener('submit', handleFormSubmission);
   });
+  
 
-  loginFormInner.addEventListener('submit', handleFormSubmission);
-});
+const handleLogout = () => {
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    usernameInput.value = '';
+    passwordInput.value = '';
+    const loginButton = document.getElementById('loginButton');
+    loginButton.innerText = 'Login';
+    const totalAmountSpentElement = document.querySelector('.sub-container4 .card-DOMUpdates');
+    totalAmountSpentElement.innerHTML = 'Login to see how much you\'ve spent this year on trips!';
+    const pendingTripsText = document.querySelector('.pending-card-DOMUpdates')
+    const upcomingTripsText = document.querySelector('.upcoming-card-DOMUpdates');
+    const pastTripsElement = document.querySelector('.sub-container2 .card-DOMUpdates');
+    pastTripsElement.innerHTML = 'Login to see your past trips!';
+    pendingTripsText.innerText = 'Login to see your pending trips!';
+    upcomingTripsText.innerText = 'Login to see your upcoming trips!'
+};
 
 const handleFormSubmission = (event) => {
-  event.preventDefault();
-
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-
-  if (validateCredentials(username, password)) {
-      const travelerId = extractTravelerId(username);
-      fetchUserData(travelerId);
-  } else {
-      alert('Invalid username or password');
-  }
-};
+    event.preventDefault();
+  
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const loginText = document.querySelector('.nav-login-button')
+    const pendingTripsText = document.querySelector('.pending-card-DOMUpdates')
+    const upcomingTripsText = document.querySelector('.upcoming-card-DOMUpdates');
+    if (validateCredentials(username, password)) {
+        const travelerId = extractTravelerId(username);
+        fetchUserData(travelerId);
+        loginText.innerText = 'Logout'
+        pendingTripsText.innerText = `You don't have any pending trips!`
+        upcomingTripsText.innerText = `You don't have any upcoming trips!`
+    } else {
+        alert('Invalid username or password');
+    }
+  };
 
 
 const fetchUserData = (travelerId) => {
@@ -50,7 +78,7 @@ const fetchUserData = (travelerId) => {
       fetchData(`${baseUrl}/destinations`),
       fetchData(`${baseUrl}/travelers/${travelerId}`)
   ])
-  .then(([tripsData, destinationsData, travelerData]) => {
+  .then(([tripsData, destinationsData]) => {
       const trips = tripsData.trips || [];
       const destinations = destinationsData.destinations || [];
 
@@ -60,7 +88,6 @@ const fetchUserData = (travelerId) => {
           updateTotalAmountSpent(tripDetails.totalAmountSpent);
           updatePastTrips(tripDetails.pastTrips, destinations);
       }
-
       hideLoginForm();
   })
   .catch(error => {
