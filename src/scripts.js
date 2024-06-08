@@ -21,7 +21,10 @@ const baseUrl = 'http://localhost:3001/api/v1'
 document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('loginButton');
     const loginFormInner = document.getElementById('loginFormInner');
-  
+    const bookTripButton = document.querySelector('.nav-book-button')
+
+    bookTripButton.style.display = 'none';
+    
     loginButton.addEventListener('click', () => {
         const isLoggedIn = loginButton.innerText === 'Logout';
         if (isLoggedIn) {
@@ -33,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
     loginFormInner.addEventListener('submit', handleFormSubmission);
   });
-  
 
 const handleLogout = () => {
     const usernameInput = document.getElementById('username');
@@ -49,7 +51,10 @@ const handleLogout = () => {
     const pastTripsElement = document.querySelector('.sub-container2 .card-DOMUpdates');
     pastTripsElement.innerHTML = 'Login to see your past trips!';
     pendingTripsText.innerText = 'Login to see your pending trips!';
-    upcomingTripsText.innerText = 'Login to see your upcoming trips!'
+    upcomingTripsText.innerText = 'Login to see your upcoming trips!';
+
+    const bookTripButton = document.querySelector('.nav-book-button');
+    bookTripButton.style.display = 'none';
 };
 
 const handleFormSubmission = (event) => {
@@ -69,31 +74,31 @@ const handleFormSubmission = (event) => {
     } else {
         alert('Invalid username or password');
     }
-  };
-
+};
 
 const fetchUserData = (travelerId) => {
-  Promise.all([
-      fetchData(`${baseUrl}/trips`),
-      fetchData(`${baseUrl}/destinations`),
-      fetchData(`${baseUrl}/travelers/${travelerId}`)
-  ])
-  .then(([tripsData, destinationsData]) => {
-      const trips = tripsData.trips || [];
-      const destinations = destinationsData.destinations || [];
-
-      const tripDetails = getTripDetailsForTraveler(travelerId, trips, destinations);
-
-      if (tripDetails) {
-          updateTotalAmountSpent(tripDetails.totalAmountSpent);
-          updatePastTrips(tripDetails.pastTrips, destinations);
-      }
-      hideLoginForm();
-  })
-  .catch(error => {
-      console.error('Error fetching data:', error);
-  });
+    Promise.all([
+        fetchData(`${baseUrl}/trips`),
+        fetchData(`${baseUrl}/destinations`),
+        fetchData(`${baseUrl}/travelers/${travelerId}`)
+    ])
+    .then(([tripsData, destinationsData]) => {
+        const trips = tripsData.trips || [];
+        const destinations = destinationsData.destinations || [];
+        const tripDetails = getTripDetailsForTraveler(travelerId, trips, destinations);
+        if (tripDetails) {
+            updateTotalAmountSpent(tripDetails.totalAmountSpent);
+            updatePastTrips(tripDetails.pastTrips, destinations);
+            const bookTripButton = document.querySelector('.nav-book-button');
+            bookTripButton.style.display = 'block';
+        }
+        hideLoginForm();
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
 };
+
 
 
 
