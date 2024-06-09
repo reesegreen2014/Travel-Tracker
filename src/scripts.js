@@ -204,3 +204,12 @@ const hideTripRequestForm = () => {
     tripRequestForm.classList.add('trip-request-form-hidden');
 };
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const bookButton = document.querySelector(".nav-book-button");
+    const bookingSection = document.querySelector(".booking-section");
+  
+    bookButton.addEventListener("click", function() {
+      bookingSection.scrollIntoView({ behavior: "smooth" });
+    });
+  });

@@ -244,29 +244,8 @@ footer {
   max-width: 100%;
 }
 
-
-#tripRequestForm { 
-  border: 3px solid #1B7791;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  text-align: center;
-  padding: 20px;
-  margin: 20px;
-  border-radius: 20px;
-  background-color: white;
-
-  h2 { 
-    color:#FB991A;
-    text-decoration: underline;
-  }
-}
-
 .booking-section {
-  display: flex;
-  flex-direction: column;
+  display: flex; 
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -277,4 +256,45 @@ footer {
   margin-right: 100px;
   padding: 50px;
 }
+
+.booking-welcome-message {
+  text-align: center;
+}
+
+.sub-container-text {
+  text-align: center;
+}
+
+.book-message {
+  color: #FB991A;
+}
+
+.booking-section form {
+  text-align: center;
+}
+
+#tripRequestForm { 
+  border: 3px solid #1B7791;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%; 
+  text-align: center;
+  padding: 20px;
+  margin: auto; 
+  border-radius: 20px;
+  background-color: white;
+}
+
+#tripRequestForm h2 { 
+  color: #FB991A;
+  text-decoration: underline;
+}
+
+.form-group {
+  text-align: center;
+}
+
+
 
