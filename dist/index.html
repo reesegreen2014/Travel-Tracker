@@ -21,8 +21,8 @@
     <main>
         <div class="welcome-message">
           <div class="sub-container-text">
-            <h2 class="trip-message">Let's take a trip!</h2>
-            <h3>Where do you want to go?</h3>
+            <h2 class="trip-message">Welcome back, adventurer!</h2>
+            <h3>Let's recap your journey!</h3>
           </div>
         </div>
         <div class="container">
@@ -44,8 +44,45 @@
             </div>
         </div>
     </main>
+    <section class="booking-section"> 
+      <div class="booking-welcome-message">
+        <div class="sub-container-text">
+          <h2 class="book-message">Let's take a trip!</h2>
+          <h3>Submit your trip request below!</h3>
+        </div>
+      </div>
+      <div id="tripRequestForm" class="trip-request-form-hidden">
+        <h2>Request a Trip</h2>
+        <form id="tripRequestFormInner">
+            <div class="form-group">
+                <label for="tripDate">Trip Date:</label>
+                <input type="date" id="tripDate" name="tripDate" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration (days):</label>
+                <input type="number" id="duration" name="duration" required>
+            </div>
+            <div class="form-group">
+                <label for="numTravelers">Number of Travelers:</label>
+                <input type="number" id="numTravelers" name="numTravelers" required>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <select id="destination" name="destination" required>
+                    <!-- Will be a drop down list of destinations from the Destinations API -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estimatedCost">Estimated Cost:</label>
+                <input type="text" id="estimatedCost" name="estimatedCost" readonly>
+            </div>
+            <button type="button" class="calculate-cost-button">Calculate Cost</button>
+            <button type="submit">Submit Request</button>
+        </form>
+    </section>
+    </main>
     <footer>
-    <h4 class="footer-text">TripTrove</h4>
+      <h3 class="footer-text">TripTrove</h3>
     </footer>
     <div id="loginForm" class="login-form-hidden">
       <h2>Let's Travel!</h2>
@@ -61,35 +98,6 @@
         <button type="submit" class="sub-menu-login-button">Login</button>
       </form>
     </div>
-    <div id="tripRequestForm" class="trip-request-form-hidden">
-      <h2>Request a Trip</h2>
-      <form id="tripRequestFormInner">
-          <div class="form-group">
-              <label for="tripDate">Trip Date:</label>
-              <input type="date" id="tripDate" name="tripDate" required>
-          </div>
-          <div class="form-group">
-              <label for="duration">Duration (days):</label>
-              <input type="number" id="duration" name="duration" required>
-          </div>
-          <div class="form-group">
-              <label for="numTravelers">Number of Travelers:</label>
-              <input type="number" id="numTravelers" name="numTravelers" required>
-          </div>
-          <div class="form-group">
-              <label for="destination">Destination:</label>
-              <select id="destination" name="destination" required>
-                  <!--Will be a drop down list of destinations from the Destinations API-->
-              </select>
-          </div>
-          <div class="form-group">
-              <label for="estimatedCost">Estimated Cost:</label>
-              <input type="text" id="estimatedCost" name="estimatedCost" readonly>
-          </div>
-          <button type="button" class="calculate-cost-button">Calculate Cost</button>
-          <button type="submit">Submit Request</button>
-      </form>
-  </div>
     <script src="bundle.js"></script>
     <script src="scripts.js"></script>
     <script src="tripProcess.js"></script>

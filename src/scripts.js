@@ -70,6 +70,7 @@ const handleLogout = () => {
     amountSpentHeader.textContent = "Let's get started!";
     totalAmountSpentElement.textContent = 'Begin your journey by logging in. Your adventure awaits just a click away!'
     bookTripButton.style.display = 'none';
+    loginButton.innerText = "Login"
 }
 
 const handleFormSubmission = (event) => {
