@@ -26,11 +26,11 @@ header {
 .header-text {
   color: #1B7791;
   margin: 0;
-  font-size: 60px;
-  padding-left: 30px;
+  font-size: 45px;
+  padding-left: 10px;
   font-family: "Teko", sans-serif;
-  font-weight: 200px;
-  font-style:oblique;
+  font-weight: 200;
+  font-style: oblique;
 }
 
 .welcome-message { 
@@ -114,14 +114,7 @@ header {
   gap: 50px;
 }
 
-.action-button { 
-  background: transparent;
-  border: none;
-  color:#022539;
-  font-size: 25px;
-}
-
-.book-button {
+.nav-book-button { 
   background-color: #FB991A;
   font-size: 25px;
   border-radius: 5px;
@@ -132,10 +125,52 @@ header {
   cursor: pointer;
 }
 
+.nav-login-button {
+  background-color: #FB991A;
+  font-size: 25px;
+  border-radius: 5px;
+  color:#022539;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+#loginForm {
+  position: absolute; 
+  margin-top: 60px;
+  top: 60px; 
+  right: 0; 
+  background-color: white;
+  border-radius: 10px;
+  padding: 18px;
+  border: 2px solid orange;
+  width: 175px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+h2 {
+  color:#1B7791;
+}
+
+.sub-menu-login-button { 
+  background-color: #FB991A;
+  margin-top: 5px;
+  font-size: 25px;
+  border-radius: 10%;
+}
+
+.form-group {
+  color: #022539;
+}
+
 footer {
   background-color: white;
   padding: 20px;
-  height: 150px;
+  height: 100px;
   display: flex;
   align-items: center;
 }
@@ -151,15 +186,41 @@ footer {
 
 .footer-text {
   color: #1B7791;
-  font-size: 50px;
-  padding-left: 30px;
+  margin: 0;
+  font-size: 45px;
+  padding-left: 10px;
   font-family: "Teko", sans-serif;
-  font-weight: 200px;
-  font-style:oblique;
-  font-size: 60px;
+  font-weight: 200;
+  font-style: oblique;
+}
+
+.login-form-hidden {
+  display: none; 
+}
+
+.form-group {
+  text-align: center;
+}
+
+.login-button {
+  margin-top: 10px;
+  background-color: #FB991A;
+  font-size: 15px;
+  border-radius: 5px;
+  color:#022539;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
 }
 
 .card-DOMUpdates {
+  color:#022539;
+  font-size: 18px;
+  padding: 2px;
+}
+
+.upcoming-card-DOMUpdates, .pending-card-DOMUpdates {
   color:#022539;
   font-size: 18px;
   padding: 2px;
