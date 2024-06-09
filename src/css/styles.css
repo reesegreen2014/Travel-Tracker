@@ -26,10 +26,10 @@ header {
 .header-text {
   color: #1B7791;
   margin: 0;
-  font-size: 45px;
+  font-size: 50px;
   padding-left: 10px;
   font-family: "Teko", sans-serif;
-  font-weight: 200;
+  font-weight: 400;
   font-style: oblique;
 }
 
@@ -187,10 +187,10 @@ footer {
 .footer-text {
   color: #1B7791;
   margin: 0;
-  font-size: 45px;
+  font-size: 50px;
   padding-left: 10px;
   font-family: "Teko", sans-serif;
-  font-weight: 200;
+  font-weight: 400;
   font-style: oblique;
 }
 
@@ -240,4 +240,15 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
+}
+
+
+#tripRequestForm { 
+  border: 2px solid orange;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  text-align: center;
 }

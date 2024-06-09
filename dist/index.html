@@ -52,7 +52,7 @@
     </footer>
     <div id="loginForm" class="login-form-hidden">
       <h2>Let's Travel! Login Below.</h2>
-      <form id="loginFormInner" action="login_process.php" method="post">
+      <form id="loginFormInner">
         <div class="form-group">
           <label for="username">Username:</label>
           <input type="text" id="username" name="username" required>
@@ -64,9 +64,37 @@
         <button type="submit" class="sub-menu-login-button">Login</button>
       </form>
     </div>
+    <div id="tripRequestForm" class="trip-request-form-hidden">
+      <h2>Request a Trip</h2>
+      <form id="tripRequestFormInner">
+          <div class="form-group">
+              <label for="tripDate">Trip Date:</label>
+              <input type="date" id="tripDate" name="tripDate" required>
+          </div>
+          <div class="form-group">
+              <label for="duration">Duration (days):</label>
+              <input type="number" id="duration" name="duration" required>
+          </div>
+          <div class="form-group">
+              <label for="numTravelers">Number of Travelers:</label>
+              <input type="number" id="numTravelers" name="numTravelers" required>
+          </div>
+          <div class="form-group">
+              <label for="destination">Destination:</label>
+              <select id="destination" name="destination" required>
+                  <!--Will be a drop down list of destinations from the Destinations API-->
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="estimatedCost">Estimated Cost:</label>
+              <input type="text" id="estimatedCost" name="estimatedCost" readonly>
+          </div>
+          <button type="button" class="calculate-cost-button">Calculate Cost</button>
+          <button type="submit">Submit Request</button>
+      </form>
+  </div>
     <script src="bundle.js"></script>
     <script src="scripts.js"></script>
     <script src="tripProcess.js"></script>
 </body>
 </html>
-
