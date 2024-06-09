@@ -286,6 +286,7 @@ footer {
   margin: auto; 
   border-radius: 20px;
   background-color: #FFFFFF; 
+  padding: 50px;
 }
 
 #tripRequestForm h2 { 

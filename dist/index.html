@@ -15,6 +15,20 @@
             <div class="action-buttons">
               <button class="nav-book-button">Book A Trip!</button>
               <button class="nav-login-button" id="loginButton">Login</button>
+              <div id="loginForm" class="login-form-hidden" tabindex="0">
+                <h2>Let's Travel!</h2>
+                <form id="loginFormInner">
+                  <div class="form-group">
+                    <label for="username" tabindex="0">Username:</label>
+                    <input type="text" id="username" name="username" tabindex="0" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password" tabindex="0">Password:</label>
+                    <input type="password" id="password" name="password" tabindex="0" required>
+                  </div>
+                  <button type="submit" class="sub-menu-login-button" tabindex="0">Login</button>
+                </form>
+              </div>
             </div>
         </nav>
     </header>
@@ -40,7 +54,7 @@
             </div>
             <div class="sub-container4" tabindex="0">
               <h1 class="card-titles" tabindex="0">Let's get started!</h1>
-              <h2 class="card-DOMUpdates">Begin your journey by logging in. Your adventure awaits just a click away!</h2>
+              <h2 class="card-DOMUpdates" tabindex="0">Begin your journey by logging in. Your adventure awaits just a click away!</h2>
             </div>
         </div>
     </main>
@@ -84,20 +98,6 @@
     <footer tabindex="0">
       <h3 class="footer-text">TripTrove</h3>
     </footer>
-    <div id="loginForm" class="login-form-hidden">
-      <h2>Let's Travel!</h2>
-      <form id="loginFormInner">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit" class="sub-menu-login-button">Login</button>
-      </form>
-    </div>
     <script src="bundle.js"></script>
     <script src="scripts.js"></script>
     <script src="tripProcess.js"></script>
