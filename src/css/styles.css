@@ -216,13 +216,13 @@ footer {
 
 .card-DOMUpdates {
   color:#022539;
-  font-size: 18px;
+  font-size: 15px;
   padding: 2px;
 }
 
 .upcoming-card-DOMUpdates, .pending-card-DOMUpdates {
   color:#022539;
-  font-size: 18px;
+  font-size: 15px;
   padding: 2px;
 }
 
@@ -252,3 +252,4 @@ footer {
   width: 300px;
   text-align: center;
 }
+

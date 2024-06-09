@@ -14,20 +14,21 @@ const updateTotalAmountSpent = (amount) => {
 }
 
 const updatePastTrips = (trips = [], destinations = []) => {
-    if (pastTripsElement) {
+  const pastTripsElement = document.querySelector('.sub-container2 .card-DOMUpdates');
+  if (pastTripsElement) {
       if (trips.length > 0) {
-        const tripLocations = trips.map(trip => {
-          const destination = destinations.find(dest => dest.id === trip.destinationID);
-          return destination ? destination.destination : 'Unknown';
-        });
-        const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
-        const list = `<ul>${listItems}</ul>`;
-        pastTripsElement.innerHTML = `<h3 class="past-trip-text">Your past trips were to:</h3> ${list}`;
+          const tripLocations = trips.slice(0, 6).map(trip => {
+              const destination = destinations.find(dest => dest.id === trip.destinationID);
+              return destination ? destination.destination : 'Unknown';
+          });
+          const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
+          const list = `<ul>${listItems}</ul>`;
+          pastTripsElement.innerHTML = `<h3 class="past-trip-text">Your past trips were to:</h3> ${list}`;
       } else {
-        pastTripsElement.innerHTML = 'No past trips recorded.';
+          pastTripsElement.innerHTML = 'No past trips recorded.';
       }
-    }
-}
+  }
+};
 
 const showLoginForm = () => {
   const loginForm = document.getElementById('loginForm');
