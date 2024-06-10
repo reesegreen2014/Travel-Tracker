@@ -40,4 +40,39 @@ fetchData('http://localhost:3001/api/v1/destinations')
 });
 
 
-export {fetchData }
+//POST FUNCTION
+function postTripRequest(id, userID, destinationID, travelers, date, duration, status, suggestedActivities) {
+  const requestBody = {
+    id,
+    userID,
+    destinationID,
+    travelers,
+    date,
+    duration,
+    status,
+    suggestedActivities
+  };
+
+  return fetch('http://localhost:3001/api/v1/trips', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestBody)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not successful: ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Success:', data);
+    return data;
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+export {fetchData, postTripRequest }

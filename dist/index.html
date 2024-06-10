@@ -9,64 +9,97 @@
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&family=Teko:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header tabindex="0">
         <nav>
             <h3 class="header-text">TripTrove</h3>
             <div class="action-buttons">
               <button class="nav-book-button">Book A Trip!</button>
               <button class="nav-login-button" id="loginButton">Login</button>
+              <div id="loginForm" class="login-form-hidden" tabindex="0">
+                <h2>Let's Travel!</h2>
+                <form id="loginFormInner">
+                  <div class="form-group">
+                    <label for="username" tabindex="0">Username:</label>
+                    <input type="text" id="username" name="username" tabindex="0" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password" tabindex="0">Password:</label>
+                    <input type="password" id="password" name="password" tabindex="0" required>
+                  </div>
+                  <button type="submit" class="sub-menu-login-button" tabindex="0">Login</button>
+                </form>
+              </div>
             </div>
         </nav>
     </header>
-    <main>
-        <div class="welcome-message">
-          <div class="sub-container-text">
-            <h2 class="trip-message">Let's take a trip!</h2>
-            <h3>Where do you want to go?</h3>
+    <main tabindex="0">
+        <div class="welcome-message" tabindex="0">
+          <div class="sub-container-text" tabindex="0">
+            <h2 class="trip-message">Welcome, adventurer!</h2>
+            <h3>Let us book your travel experience!</h3>
           </div>
         </div>
-        <div class="container">
-            <div class="sub-container1">
-              <h1 class="card-titles">Upcoming Trips</h1>
-              <h2 class="upcoming-card-DOMUpdates">Login to see your upcoming trips!</h2>
-              <img src="./images/Beach.jpg" class="vacation-photos" alt="a photo of blue water, peering through a palm tree with a lot of plants">
+        <div class="container" tabindex="0">
+            <div class="sub-container1" tabindex="0">
+              <h1 class="card-titles" tabindex="0">Explore the World Stress-Free!</h1>
+              <h2 class="upcoming-card-DOMUpdates" tabindex="0">Discover over 50 dream destinations hassle-free with our expert planning. Let us handle every detail while you focus on the adventure!</h2>
             </div>
-            <div class="sub-container2">
-              <h1 class="card-titles">Past Trips</h1>
-              <h2 class="card-DOMUpdates">Login to see your past trips!</h2>
-              <!-- <img src="./images/Jungle.jpg" class="vacation-photos" alt="a photo of a jungle, with big trees and a dirt path going down the center"> -->
+            <div class="sub-container2" tabindex="0">
+              <h1 class="card-titles" tabindex="0">Unlock Your Wanderlust with Ease!</h1>
+              <h2 class="card-DOMUpdates" tabindex="0">With a nominal 10% agent fee, enjoy the convenience of seamless travel planning. Leave the logistics to us and embrace the joy of exploration!</h2>
             </div>
-            <div class="sub-container3">
-              <h1 class="card-titles">Pending Trips</h1>
-              <h2 class="pending-card-DOMUpdates">Login to see your pending trips!</h2>
+            <div class="sub-container3" tabindex="0">
+              <h1 class="card-titles" tabindex="0">Your Journey, Our Expertise</h1>
+              <h2 class="pending-card-DOMUpdates" tabindex="0">From booking to boarding, we've got you covered. Trust our seasoned agents to curate your perfect getaway, ensuring a memorable experience every step of the way!</h2>
             </div>
-            <div class="sub-container4">
-              <h1 class="card-titles">Money Spent</h1>
-              <h2 class="card-DOMUpdates">Login to see how much you've spent this year on trips!</h2>
-              <img src="./images/Money.jpg" class="vacation-photos" alt="photo with American dollar bills">
+            <div class="sub-container4" tabindex="0">
+              <h1 class="card-titles" tabindex="0">Let's get started!</h1>
+              <h2 class="card-DOMUpdates" tabindex="0">Begin your journey by logging in. Your adventure awaits just a click away!</h2>
             </div>
         </div>
     </main>
-    <footer>
-    <h4 class="footer-text">TripTrove</h4>
+    <section class="booking-section" style="display: none;" tabindex="0"> 
+      <div class="booking-welcome-message" tabindex="0">
+        <div class="sub-container-text">
+          <h2 class="book-message" tabindex="0">Looking for more adventure?</h2>
+          <h3 class="submit-trip" tabindex="0">Submit your trip request below!</h3>
+        </div>
+      </div>
+      <div id="tripRequestForm" class="trip-request-form-hidden" tabindex="0">
+        <h2>Request a Trip</h2>
+        <form id="tripRequestFormInner">
+            <div class="form-group">
+                <label for="tripDate">Trip Date:</label>
+                <input type="date" id="tripDate" name="tripDate" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Duration (days):</label>
+                <input type="number" id="duration" name="duration" required>
+            </div>
+            <div class="form-group">
+                <label for="numTravelers">Number of Travelers:</label>
+                <input type="number" id="numTravelers" name="numTravelers" required>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <select id="destination" name="destination" required>
+                    <!-- Will be a drop down list of destinations from the Destinations API -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estimatedCost">Estimated Cost:</label>
+                <input type="text" id="estimatedCost" name="estimatedCost" readonly>
+            </div>
+            <button type="button" class="calculate-cost-button">Calculate Cost</button>
+            <button type="submit" class="submit-request-button">Submit Request</button>
+        </form>
+      </div>
+    </section>
+    <footer tabindex="0">
+      <h3 class="footer-text">TripTrove</h3>
     </footer>
-    <div id="loginForm" class="login-form-hidden">
-      <h2>Let's Travel! Login Below.</h2>
-      <form id="loginFormInner" action="login_process.php" method="post">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit" class="sub-menu-login-button">Login</button>
-      </form>
-    </div>
     <script src="bundle.js"></script>
     <script src="scripts.js"></script>
     <script src="tripProcess.js"></script>
 </body>
 </html>
-
