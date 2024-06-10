@@ -26,6 +26,8 @@ const pendingTripsHeader = document.querySelector('.sub-container3 .card-titles'
 const amountSpentHeader = document.querySelector('.sub-container4 .card-titles');
 const bookingSection = document.querySelector('.booking-section');
 bookTripButton.style.display = 'none';
+const tripMessage = document.querySelector('.trip-message');
+const tripMessageSubContainer = document.querySelector('.sub-container-text');
 
 document.addEventListener('DOMContentLoaded', () => {
     loginButton.addEventListener('click', () => {
@@ -72,6 +74,8 @@ const handleLogout = () => {
     bookTripButton.style.display = 'none';
     loginButton.innerText = "Login";
     bookingSection.style.display = 'none';
+    tripMessage.textContent = 'Welcome, adventurer!';
+    tripMessageSubContainer.lastElementChild.textContent = 'Let us book your travel experience!';
 };
 
 const handleFormSubmission = (event) => {
@@ -84,12 +88,18 @@ const handleFormSubmission = (event) => {
         const travelerId = extractTravelerId(username);
         fetchUserData(travelerId);
         loginText.innerText = 'Logout';
+        updateWelcomeMessage("Welcome back, adventurer!", "Let's recap your adventures!");
         pendingTripsText.innerText = `You don't have any pending trips!`;
         upcomingTripsText.innerText = `You don't have any upcoming trips!`;
         bookingSection.style.display = 'block';
     } else {
         alert('Invalid username or password');
     }
+};
+
+const updateWelcomeMessage = (headingText, subheadingText) => {
+    tripMessage.innerText = headingText;
+    tripMessageSubContainer.lastElementChild.innerText = subheadingText;
 };
 
 const fetchUserData = (travelerId) => {
