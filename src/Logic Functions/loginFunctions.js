@@ -2,7 +2,8 @@ const validateCredentials = (username, password) => {
     const travelerId = extractTravelerId(username);
     if (travelerId !== -1) {
         return username.startsWith('traveler') && password === 'travel';
-}
+    }
+    return false;
 }
 
 const extractTravelerId = (username) => {

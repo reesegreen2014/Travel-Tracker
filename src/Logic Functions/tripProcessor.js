@@ -1,4 +1,7 @@
 const filterTripsByTraveler = (trips = [], travelerId) => {
+  if (!trips || !trips.length) {
+    return [];
+  }
   return trips.filter(trip => trip.userID === travelerId);
 }
 
@@ -61,4 +64,4 @@ const getTripDetailsForTraveler = (travelerId, trips = [], destinations = [], cu
   }
 }
 
-export { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips };
+export { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips, filterTripsByTraveler};

@@ -1,5 +1,4 @@
-import { fetchData } from "../APICalls";
-import { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips } from "../Logic Functions/tripProcessor";
+import { calculateTotalAmountSpent } from "../Logic Functions/tripProcessor";
 import { hideTripRequestForm } from "../scripts";
 
 //querySelectors
