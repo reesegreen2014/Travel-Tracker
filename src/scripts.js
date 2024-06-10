@@ -93,6 +93,8 @@ const handleFormSubmission = (event) => {
 };
 
 const fetchUserData = (travelerId) => {
+    const currentYear = 2022;
+
     Promise.all([
         fetchData(`${baseUrl}/trips`),
         fetchData(`${baseUrl}/destinations`),
@@ -101,11 +103,13 @@ const fetchUserData = (travelerId) => {
     .then(([tripsData, destinationsData]) => {
         const trips = tripsData.trips || [];
         const destinations = destinationsData.destinations || [];
+        
         const tripDetails = getTripDetailsForTraveler(travelerId, trips, destinations);
         if (tripDetails) {
             updateContainerHeaders(tripDetails);
-            updateTotalAmountSpent(tripDetails.totalAmountSpent);
+            updateTotalAmountSpent(trips, destinations, currentYear); 
             updatePastTrips(tripDetails.pastTrips, destinations);
+            updatePendingTrips(trips, destinations, travelerId); 
             const bookTripButton = document.querySelector('.nav-book-button');
             bookTripButton.style.display = 'block';
         }
@@ -195,9 +199,25 @@ const handleTripRequestSubmission = (event) => {
         });
 };
 
-const updatePendingTrips = () => {
-    pendingTripsText.innerText = `Your trip request is pending approval! You will hear back from your travel agent soon.`;
+const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
+    const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
+    if (pendingTripsElement) {
+        const pendingTrips = trips.filter(trip => trip.status === 'pending' && trip.userID === travelerId);
+
+        if (pendingTrips.length > 0) {
+            const tripLocations = pendingTrips.map(trip => {
+                const destination = destinations.find(dest => dest.id === trip.destinationID);
+                return destination ? destination.destination : 'Unknown';
+            });
+            const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
+            const list = `<ul>${listItems}</ul>`;
+            pendingTripsElement.innerHTML = `<h3 class="pending-trip-text">Your pending trips:</h3> ${list}`;
+        } else {
+            pendingTripsElement.innerHTML = 'You have no pending trips!';
+        }
+    }
 };
+
 
 const hideTripRequestForm = () => {
     const tripRequestForm = document.getElementById('tripRequestForm');
