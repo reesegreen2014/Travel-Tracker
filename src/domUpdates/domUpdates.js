@@ -6,6 +6,8 @@ import { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips }
 const totalAmountSpentElement = document.querySelector('.sub-container4 .card-DOMUpdates')
 const pastTripsElement = document.querySelector('.sub-container2 .card-DOMUpdates')
 
+
+
 const updateTotalAmountSpent = (trips = [], destinations = [], currentYear) => {
   const approvedTrips = trips.filter(trip => {
       const tripDate = new Date(trip.date);

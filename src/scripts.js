@@ -179,18 +179,20 @@ const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
     if (pendingTripsElement) {
         const filteredPendingTrips = trips.filter(trip => trip.status === 'pending' && trip.userID === travelerId);
         if (filteredPendingTrips.length > 0) {
+            pendingTripsElement.innerHTML = '';
             const tripLocations = filteredPendingTrips.map(trip => {
                 const destination = destinations.find(dest => dest.id === trip.destinationID);
                 return destination ? destination.destination : 'Unknown';
             });
-            const listItems = tripLocations.map(location => `<ul class="API-location">${location}</ul>`).join('');
+            const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join(''); // Correct use of <li>
             const list = `<ul>${listItems}</ul>`;
             pendingTripsElement.innerHTML = list; 
         } else {
-            pendingTripsElement.innerHTML = 'You have no pending trips!';
+            pendingTripsElement.innerHTML = '<p>No pending trips!</p>'; 
         }
     }
 };
+
 
 const hideTripRequestForm = () => {
     const tripRequestForm = document.getElementById('tripRequestForm');
