@@ -110,7 +110,7 @@ const fetchUserData = (travelerId) => {
 };
 
 
-const updateContainerHeaders = (tripDetails) => {
+const updateContainerHeaders = () => {
     upcomingTripsHeader.textContent = 'Your upcoming trips';
     pastTripsHeader.textContent = 'Your past trips';
     pendingTripsHeader.textContent = 'Your pending trips';
@@ -128,28 +128,34 @@ const populateDestinationOptions = (destinations) => {
 };
 
 const calculateEstimatedCost = () => {
+    const tripDateInput = document.getElementById('tripDate');
+    const durationInput = document.getElementById('duration');
+    const numTravelersInput = document.getElementById('numTravelers');
     const destinationSelect = document.getElementById('destination');
-    const numTravelers = parseInt(document.getElementById('numTravelers').value);
-    const duration = parseInt(document.getElementById('duration').value);
-    
-    const selectedDestination = destinationSelect.options[destinationSelect.selectedIndex];
-    const destinationId = parseInt(selectedDestination.value);
 
-    fetchData(`${baseUrl}/destinations`)
-        .then(data => {
-            const destination = data.destinations.find(dest => dest.id === destinationId);
-            if (destination) {
-                const lodgingCost = destination.estimatedLodgingCostPerDay * duration;
-                const flightCost = destination.estimatedFlightCostPerPerson * numTravelers;
-                const totalCost = lodgingCost + flightCost;
-                const totalCostWithFee = totalCost + (totalCost * 0.10); 
-                document.getElementById('estimatedCost').value = `$${totalCostWithFee.toFixed(2)}`;
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching destination:', error);
-        });
+    if (tripDateInput.value && durationInput.value && numTravelersInput.value && destinationSelect.value) {
+        const numTravelers = parseInt(numTravelersInput.value);
+        const duration = parseInt(durationInput.value);
+        const destinationId = parseInt(destinationSelect.value);
+        fetchData(`${baseUrl}/destinations`)
+            .then(data => {
+                const destination = data.destinations.find(destination => destination.id === destinationId);
+                if (destination) {
+                    const lodgingCost = destination.estimatedLodgingCostPerDay * duration;
+                    const flightCost = destination.estimatedFlightCostPerPerson * numTravelers;
+                    const totalCost = lodgingCost + flightCost;
+                    const totalCostWithFee = totalCost + (totalCost * 0.10); 
+                    document.getElementById('estimatedCost').value = `$${totalCostWithFee.toFixed(2)}`;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching destination:', error);
+            });
+    } else {
+        alert('Please fill out all required fields before calculating the cost.');
+    }
 };
+
 
 const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
     const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
