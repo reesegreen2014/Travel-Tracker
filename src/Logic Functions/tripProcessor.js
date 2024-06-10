@@ -1,5 +1,7 @@
-//LOGIC FUNCTIONS 
 const filterTripsByTraveler = (trips = [], travelerId) => {
+  if (!trips || !trips.length) {
+    return [];
+  }
   return trips.filter(trip => trip.userID === travelerId);
 }
 
@@ -21,7 +23,6 @@ const categorizeTrips = (trips) => {
   return { pastTrips, upcomingTrips, pendingTrips };
 }
 
-
 const calculateTotalAmountSpent = (pastTrips = [], destinations = [], currentYear) => {
   const agentFee = 0.10;
   let totalAmountSpent = 0;
@@ -41,11 +42,8 @@ const calculateTotalAmountSpent = (pastTrips = [], destinations = [], currentYea
           }
       }
   });
-
   return totalAmountSpent;
 };
-
-
 
 const getTripDetailsForTraveler = (travelerId, trips = [], destinations = [], currentYear = 2020) => {
   try {
@@ -66,4 +64,4 @@ const getTripDetailsForTraveler = (travelerId, trips = [], destinations = [], cu
   }
 }
 
-export { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips };
+export { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips, filterTripsByTraveler};

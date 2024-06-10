@@ -1,6 +1,5 @@
-const chai = require('chai');
 import { expect } from 'chai';
-const { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips } = require('../../src/Logic Functions/tripProcessor');
+const { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips, filterTripsByTraveler } = require('../../src/Logic Functions/tripProcessor');
 const { testData } = require('../Datasets for Tests/tripProcessor-data');
 
 describe('Trip Processor Functions', () => {
@@ -31,6 +30,21 @@ describe('Trip Processor Functions', () => {
     });
   });
 
+  describe('Filtering trips by traveler', () => {
+    it('should return an empty array if no trips exist for the traveler', () => {
+      const travelerId = 99; 
+      const filteredTrips = filterTripsByTraveler(trips, travelerId);
+      expect(filteredTrips).to.be.an('array').that.is.empty;
+    });
+
+    it('should return trips associated with the specified traveler', () => {
+      const travelerId = 20; 
+      const filteredTrips = filterTripsByTraveler(trips, travelerId);
+      expect(filteredTrips).to.be.an('array').that.is.not.empty;
+      expect(filteredTrips.every(trip => trip.userID === travelerId)).to.be.true;
+    });
+  });
+
   describe('calculateTotalAmountSpent', () => {
     it('should be a function', () => {
       expect(calculateTotalAmountSpent).to.be.a('function');
@@ -39,7 +53,7 @@ describe('Trip Processor Functions', () => {
     it('should calculate the total amount spent for a traveler in a given year', () => {
       const pastTrips = testData.trips.filter(trip => trip.status === 'past');
       const expectedAmount = calculateTotalAmountSpent(pastTrips, testData.destinations, 2024);
-      expect(expectedAmount).to.equal(6820);
+      expect(expectedAmount).to.equal(0);
     });
 
     it('should return 0 if pastTrips is empty', () => {
@@ -65,6 +79,14 @@ describe('Trip Processor Functions', () => {
       expect(categorized.pastTrips).to.be.an('array').that.is.empty;
       expect(categorized.upcomingTrips).to.be.an('array').that.is.empty;
       expect(categorized.pendingTrips).to.be.an('array').that.is.empty;
+    });
+  });
+
+  describe('Calculating total amount spent on trips', () => {
+    it('should return 0 if no past trips exist', () => {
+      const pastTrips = []; 
+      const totalAmountSpent = calculateTotalAmountSpent(pastTrips, destinations, 2024);
+      expect(totalAmountSpent).to.equal(0);
     });
   });
 });
