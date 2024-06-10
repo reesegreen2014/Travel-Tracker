@@ -41,6 +41,7 @@ const handleTripRequestSubmission = (event) => {
                     listItem.textContent = selectedDestination;
                     pendingTripsElement.appendChild(listItem);
                 }
+                document.getElementById('tripRequestFormInner').reset();
             }
         })
         .catch(error => {
