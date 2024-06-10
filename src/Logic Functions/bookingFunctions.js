@@ -11,8 +11,7 @@ const handleTripRequestSubmission = (event) => {
     const estimatedCost = parseFloat(document.getElementById('estimatedCost').value.replace('$', ''));
     const username = document.getElementById('username').value;
     const userID = extractTravelerId(username);
-    const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
-    const selectedDestination = document.getElementById('destination').selectedOptions[0].textContent; // Get the selected option text
+    const selectedDestination = document.getElementById('destination').selectedOptions[0].textContent;
     const newTrip = {
         id: Date.now(),
         userID: userID,
@@ -26,8 +25,6 @@ const handleTripRequestSubmission = (event) => {
 
     console.log('Submitting new trip request:', newTrip);
 
-    pendingTripsElement.innerHTML = '';
-
     postTripRequest(newTrip.id, newTrip.userID, newTrip.destinationID, newTrip.travelers, newTrip.date, newTrip.duration, newTrip.status, newTrip.suggestedActivities)
         .then(data => {
             if (data) {
@@ -36,10 +33,13 @@ const handleTripRequestSubmission = (event) => {
 
                 const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
                 if (pendingTripsElement) {
-                    const destination = document.createElement('ul');
-                    destination.classList.add('API-location');
-                    destination.textContent = selectedDestination; 
-                    pendingTripsElement.appendChild(destination);
+                    if (pendingTripsElement.textContent === 'No pending trips!') {
+                        pendingTripsElement.innerHTML = ''; 
+                    }
+                    const listItem = document.createElement('ul');
+                    listItem.classList.add('API-location');
+                    listItem.textContent = selectedDestination;
+                    pendingTripsElement.appendChild(listItem);
                 }
             }
         })
@@ -49,4 +49,5 @@ const handleTripRequestSubmission = (event) => {
         });
 };
 
-export {handleTripRequestSubmission}
+export { handleTripRequestSubmission };
+
