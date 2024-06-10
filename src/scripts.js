@@ -22,6 +22,7 @@ const pendingTripsHeader = document.querySelector('.sub-container3 .card-titles'
 const amountSpentHeader = document.querySelector('.sub-container4 .card-titles');
 const bookingSection = document.querySelector('.booking-section');
 bookTripButton.style.display = 'none';
+const tripRequestForm = document.getElementById('tripRequestForm')
 const tripMessage = document.querySelector('.trip-message');
 const tripMessageSubContainer = document.querySelector('.sub-container-text');
 
@@ -186,4 +187,4 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 
-export {updatePendingTrips}
+export {updatePendingTrips, hideTripRequestForm }

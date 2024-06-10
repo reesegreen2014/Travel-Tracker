@@ -1,6 +1,6 @@
 import { fetchData } from "../APICalls";
 import { getTripDetailsForTraveler, calculateTotalAmountSpent, categorizeTrips } from "../Logic Functions/tripProcessor";
-
+import { hideTripRequestForm } from "../scripts";
 
 //querySelectors
 const totalAmountSpentElement = document.querySelector('.sub-container4 .card-DOMUpdates')
@@ -80,6 +80,7 @@ const handleLogout = () => {
   bookingSection.style.display = 'none';
   tripMessage.textContent = 'Welcome, adventurer!';
   tripMessageSubContainer.lastElementChild.textContent = 'Let us book your travel experience!';
+  hideTripRequestForm();
 };
 
 
