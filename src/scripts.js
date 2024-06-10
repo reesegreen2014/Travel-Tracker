@@ -1,16 +1,10 @@
 import './css/styles.css';
-import './images/turing-logo.png';
-import './images/Beach.jpg';
-import './images/Jungle.jpg';
-import './images/Rome.jpg';
-import './images/Money.jpg';
 import { fetchData } from './APICalls'; 
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout } from './domUpdates/domUpdates';
+import { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
 import { validateCredentials, extractTravelerId } from './Logic Functions/loginFunctions';
 import { handleTripRequestSubmission } from './Logic Functions/bookingFunctions';
 const baseUrl = 'http://localhost:3001/api/v1';
-
 const loginButton = document.getElementById('loginButton');
 const bookTripButton = document.querySelector('.nav-book-button');
 const calculateCostButton = document.querySelector('.calculate-cost-button');
@@ -109,14 +103,6 @@ const fetchUserData = (travelerId) => {
     });
 };
 
-
-const updateContainerHeaders = () => {
-    upcomingTripsHeader.textContent = 'Your upcoming trips';
-    pastTripsHeader.textContent = 'Your past trips';
-    pendingTripsHeader.textContent = 'Your pending trips';
-    amountSpentHeader.textContent = 'Amount Spent This year';
-};
-
 const populateDestinationOptions = (destinations) => {
     const destinationSelect = document.getElementById('destination');
     destinations.forEach(destination => {
@@ -156,7 +142,6 @@ const calculateEstimatedCost = () => {
     }
 };
 
-
 const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
     const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
     if (pendingTripsElement) {
@@ -176,12 +161,10 @@ const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
     }
 };
 
-
 const hideTripRequestForm = () => {
     const tripRequestForm = document.getElementById('tripRequestForm');
     tripRequestForm.classList.add('trip-request-form-hidden');
 };
-
 
 document.addEventListener("DOMContentLoaded", function() {
     const bookButton = document.querySelector(".nav-book-button");
@@ -191,6 +174,5 @@ document.addEventListener("DOMContentLoaded", function() {
       bookingSection.scrollIntoView({ behavior: "smooth" });
     });
   });
-
 
 export {updatePendingTrips, hideTripRequestForm }

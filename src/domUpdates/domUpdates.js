@@ -82,6 +82,13 @@ const handleLogout = () => {
   hideTripRequestForm();
 };
 
+const updateContainerHeaders = () => {
+  upcomingTripsHeader.textContent = 'Your upcoming trips';
+  pastTripsHeader.textContent = 'Your past trips';
+  pendingTripsHeader.textContent = 'Your pending trips';
+  amountSpentHeader.textContent = 'Amount Spent This year';
+};
 
-export { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout }
+
+export { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders }
 
