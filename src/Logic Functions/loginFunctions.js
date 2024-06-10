@@ -1,9 +1,14 @@
 const validateCredentials = (username, password) => {
-    return username.startsWith('traveler') && password === 'travel';
-};
+    const travelerId = extractTravelerId(username);
+    if (travelerId !== -1) {
+        return username.startsWith('traveler') && password === 'travel';
+}
+}
 
 const extractTravelerId = (username) => {
-    return parseInt(username.slice(8));
+    const travelerUserID= username.slice(8);
+    const travelerId = parseInt(travelerUserID);
+    return (travelerId >= 1 && travelerId <= 50) ? travelerId : -1;
 };
 
 export { validateCredentials, extractTravelerId };
