@@ -8,7 +8,7 @@ import { fetchData, postTripRequest } from './APICalls';
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
 import { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm } from './domUpdates/domUpdates';
 import { validateCredentials, extractTravelerId } from './Logic Functions/loginFunctions';
-
+import { handleTripRequestSubmission } from './Logic Functions/bookingFunctions';
 const baseUrl = 'http://localhost:3001/api/v1';
 
 const loginButton = document.getElementById('loginButton');
@@ -174,63 +174,23 @@ const calculateEstimatedCost = () => {
         });
 };
 
-
-const handleTripRequestSubmission = (event) => {
-    event.preventDefault();
-    const tripDate = document.getElementById('tripDate').value;
-    const duration = parseInt(document.getElementById('duration').value);
-    const numTravelers = parseInt(document.getElementById('numTravelers').value);
-    const destinationId = parseInt(document.getElementById('destination').value);
-    const estimatedCost = parseFloat(document.getElementById('estimatedCost').value.replace('$', ''));
-    const username = document.getElementById('username').value;
-    const userID = extractTravelerId(username);
-    const newTrip = {
-        id: Date.now(),
-        userID: userID,
-        destinationID: destinationId,
-        travelers: numTravelers,
-        date: tripDate.split("-").join("/"),
-        duration: duration,
-        status: 'pending',
-        suggestedActivities: []
-    };
-
-    console.log('Submitting new trip request:', newTrip);
-
-    postTripRequest(newTrip.id, newTrip.userID, newTrip.destinationID, newTrip.travelers, newTrip.date, newTrip.duration, newTrip.status, newTrip.suggestedActivities)
-        .then(data => {
-            if (data) {
-                console.log('Trip request submitted successfully:', data);
-                alert('Your trip request has been submitted and is pending approval.');
-                updatePendingTrips();
-                hideTripRequestForm();
-            }
-        })
-        .catch(error => {
-            console.error('Error submitting trip request:', error);
-            alert('There was an error submitting your trip request. Please try again.');
-        });
-};
-
 const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
     const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
     if (pendingTripsElement) {
-        const pendingTrips = trips.filter(trip => trip.status === 'pending' && trip.userID === travelerId);
-
-        if (pendingTrips.length > 0) {
-            const tripLocations = pendingTrips.map(trip => {
+        const filteredPendingTrips = trips.filter(trip => trip.status === 'pending' && trip.userID === travelerId);
+        if (filteredPendingTrips.length > 0) {
+            const tripLocations = filteredPendingTrips.map(trip => {
                 const destination = destinations.find(dest => dest.id === trip.destinationID);
                 return destination ? destination.destination : 'Unknown';
             });
             const listItems = tripLocations.map(location => `<ul class="API-location">${location}</ul>`).join('');
             const list = `<ul>${listItems}</ul>`;
-            pendingTripsElement.innerHTML = `${list}`;
+            pendingTripsElement.innerHTML = list; 
         } else {
             pendingTripsElement.innerHTML = 'You have no pending trips!';
         }
     }
 };
-
 
 const hideTripRequestForm = () => {
     const tripRequestForm = document.getElementById('tripRequestForm');
@@ -246,3 +206,6 @@ document.addEventListener("DOMContentLoaded", function() {
       bookingSection.scrollIntoView({ behavior: "smooth" });
     });
   });
+
+
+export {updatePendingTrips}
