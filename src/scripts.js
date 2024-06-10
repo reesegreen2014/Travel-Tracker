@@ -4,22 +4,18 @@ import './images/Beach.jpg';
 import './images/Jungle.jpg';
 import './images/Rome.jpg';
 import './images/Money.jpg';
-import { fetchData, postTripRequest } from './APICalls'; 
+import { fetchData } from './APICalls'; 
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm } from './domUpdates/domUpdates';
+import { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout } from './domUpdates/domUpdates';
 import { validateCredentials, extractTravelerId } from './Logic Functions/loginFunctions';
 import { handleTripRequestSubmission } from './Logic Functions/bookingFunctions';
 const baseUrl = 'http://localhost:3001/api/v1';
 
 const loginButton = document.getElementById('loginButton');
-const loginFormInner = document.getElementById('loginFormInner');
 const bookTripButton = document.querySelector('.nav-book-button');
-const tripRequestForm = document.getElementById('tripRequestFormInner');
 const calculateCostButton = document.querySelector('.calculate-cost-button');
 const pendingTripsText = document.querySelector('.pending-card-DOMUpdates');
 const upcomingTripsText = document.querySelector('.upcoming-card-DOMUpdates');
-const totalAmountSpentElement = document.querySelector('.sub-container4 .card-DOMUpdates');
-const pastTripsElement = document.querySelector('.sub-container2 .card-DOMUpdates');
 const upcomingTripsHeader = document.querySelector('.sub-container1 .card-titles');
 const pastTripsHeader = document.querySelector('.sub-container2 .card-titles');
 const pendingTripsHeader = document.querySelector('.sub-container3 .card-titles');
@@ -57,26 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         calculateCostButton.addEventListener('click', calculateEstimatedCost);
     }
 });
-
-const handleLogout = () => {
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    usernameInput.value = '';
-    passwordInput.value = '';
-    upcomingTripsHeader.textContent = 'Explore the World Stress-Free!';
-    upcomingTripsText.textContent = 'Discover over 50 dream destinations hassle-free with our expert planning. Let us handle every detail while you focus on the adventure!';
-    pastTripsHeader.textContent = 'Unlock Your Wanderlust with Ease!';
-    pastTripsElement.textContent = 'With a nominal 10% agent fee, enjoy the convenience of seamless travel planning. Leave the logistics to us and embrace the joy of exploration!';
-    pendingTripsHeader.textContent = 'Your Journey, Our Expertise';
-    pendingTripsText.innerHTML = "From booking to boarding, we've got you covered. Trust our seasoned agents to curate your perfect getaway, ensuring a memorable experience every step of the way!";
-    amountSpentHeader.textContent = "Let's get started!";
-    totalAmountSpentElement.textContent = 'Begin your journey by logging in. Your adventure awaits just a click away!';
-    bookTripButton.style.display = 'none';
-    loginButton.innerText = "Login";
-    bookingSection.style.display = 'none';
-    tripMessage.textContent = 'Welcome, adventurer!';
-    tripMessageSubContainer.lastElementChild.textContent = 'Let us book your travel experience!';
-};
 
 const handleFormSubmission = (event) => {
     event.preventDefault();
