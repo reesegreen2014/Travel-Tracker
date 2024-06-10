@@ -5,8 +5,8 @@ TripTrove is an application designed to make travel planning easy and stress-fre
 ## Features
 
 - **Explore Destinations**: Discover over 50 dream destinations with expert planning.
-- **Book Trips**: Seamless booking process directly from your personalized dashboard.
-- **Submit Trip Requests**: Tailor your travel experience by submitting trip requests.
+- **Review Your Travel History**: Review your travel history within your dashboard - from your past, upcoming, pending trips to the amount you've spent YTD on travel.
+- **Submit Trip Requests**: Tailor your travel experience by submitting trip requests, and let the travel agents handle the rest.
 
 ## Technologies Used
 
