@@ -93,7 +93,7 @@ const handleFormSubmission = (event) => {
 };
 
 const fetchUserData = (travelerId) => {
-    const currentYear = 2022;
+    const currentYear = 2022; 
 
     Promise.all([
         fetchData(`${baseUrl}/trips`),
@@ -104,12 +104,14 @@ const fetchUserData = (travelerId) => {
         const trips = tripsData.trips || [];
         const destinations = destinationsData.destinations || [];
         
-        const tripDetails = getTripDetailsForTraveler(travelerId, trips, destinations);
+        const travelerTrips = trips.filter(trip => trip.userID === travelerId);
+        const tripDetails = getTripDetailsForTraveler(travelerId, travelerTrips, destinations);
+
         if (tripDetails) {
             updateContainerHeaders(tripDetails);
-            updateTotalAmountSpent(trips, destinations, currentYear); 
+            updateTotalAmountSpent(travelerTrips, destinations, currentYear); 
             updatePastTrips(tripDetails.pastTrips, destinations);
-            updatePendingTrips(trips, destinations, travelerId); 
+            updatePendingTrips(travelerTrips, destinations, travelerId); 
             const bookTripButton = document.querySelector('.nav-book-button');
             bookTripButton.style.display = 'block';
         }
@@ -119,6 +121,7 @@ const fetchUserData = (travelerId) => {
         console.error('Error fetching data:', error);
     });
 };
+
 
 const updateContainerHeaders = (tripDetails) => {
     upcomingTripsHeader.textContent = 'Your upcoming trips';
@@ -209,9 +212,9 @@ const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
                 const destination = destinations.find(dest => dest.id === trip.destinationID);
                 return destination ? destination.destination : 'Unknown';
             });
-            const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
+            const listItems = tripLocations.map(location => `<ul class="API-location">${location}</ul>`).join('');
             const list = `<ul>${listItems}</ul>`;
-            pendingTripsElement.innerHTML = `<h3 class="pending-trip-text">Your pending trips:</h3> ${list}`;
+            pendingTripsElement.innerHTML = `${list}`;
         } else {
             pendingTripsElement.innerHTML = 'You have no pending trips!';
         }

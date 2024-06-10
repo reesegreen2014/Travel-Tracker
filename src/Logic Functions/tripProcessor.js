@@ -27,21 +27,24 @@ const calculateTotalAmountSpent = (pastTrips = [], destinations = [], currentYea
   let totalAmountSpent = 0;
 
   pastTrips.forEach(trip => {
-    const tripDate = new Date(trip.date);
-    const tripYear = tripDate.getFullYear();
-
-    if (tripYear === currentYear) {
-      const destination = destinations.find(dest => dest.id === trip.destinationID);
-
-      if (destination) {
-        const tripCost = (destination.estimatedLodgingCostPerDay * trip.duration) + (destination.estimatedFlightCostPerPerson * trip.travelers);
-        totalAmountSpent += tripCost + (tripCost * agentFee);
+      if (trip.status === 'approved') {
+          const tripDate = new Date(trip.date);
+          const tripYear = tripDate.getFullYear();
+  
+          if (tripYear === currentYear) {
+              const destination = destinations.find(dest => dest.id === trip.destinationID);
+  
+              if (destination) {
+                  const tripCost = (destination.estimatedLodgingCostPerDay * trip.duration) + (destination.estimatedFlightCostPerPerson * trip.travelers);
+                  totalAmountSpent += tripCost + (tripCost * agentFee);
+              }
+          }
       }
-    }
   });
 
   return totalAmountSpent;
-}
+};
+
 
 
 const getTripDetailsForTraveler = (travelerId, trips = [], destinations = [], currentYear = 2020) => {

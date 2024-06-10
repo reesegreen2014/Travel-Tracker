@@ -98,6 +98,16 @@ nav {
   padding: 10px;
 }
 
+.sub-container3 ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+}
+
 .vacation-photos {
   width: 100px;
   height: 100px;
@@ -178,6 +188,8 @@ footer {
 
 .API-location {
   font-size: 15px;
+  text-align: center;
+  align-items: center;
 }
 
 .footer-text {
@@ -220,6 +232,10 @@ footer {
   color: #555555; 
   font-size: 15px;
   padding: 2px;
+  text-align: center;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
 }
 
 .sub-container2 .card-DOMUpdates ul {
@@ -260,7 +276,30 @@ footer {
 }
 
 .book-message {
-  color: #E35D6A; 
+  font-family: "Shadows Into Light Two", cursive;
+  font-style: normal;
+  font-size: 30px;
+  word-spacing: 20px;
+  position: relative; 
+  display: inline-block;
+}
+
+.submit-trip {
+  color: #555555; 
+  font-size: 20px;
+  margin: 15px;
+  margin-bottom: 20px;
+}
+
+.book-message::after {
+  content: '';
+  position: absolute; 
+  bottom: -15px;
+  left: -25%;
+  width: 150%; 
+  height: 5px; 
+  background-color: #E35D6A;
+  border-radius: 50%; 
 }
 
 .booking-section form {
