@@ -20,16 +20,20 @@ const tripRequestForm = document.getElementById('tripRequestForm')
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const toggleLoginForm = () => {
+        loginForm.classList.toggle('login-form-hidden');
+    };
     loginButton.addEventListener('click', () => {
         const isLoggedIn = loginButton.innerText === 'Logout';
         if (isLoggedIn) {
             handleLogout();
         } else {
-            showLoginForm();
+            toggleLoginForm(); 
         }
     });
 
-    loginFormInner.addEventListener('submit', handleFormSubmission);
+    loginForm.addEventListener('submit', handleFormSubmission);
 
     if (tripRequestForm) {
         tripRequestForm.addEventListener('submit', handleTripRequestSubmission);
@@ -64,6 +68,7 @@ const handleFormSubmission = (event) => {
         pendingTripsText.innerText = `You don't have any pending trips!`;
         upcomingTripsText.innerText = `You don't have any upcoming trips!`;
         bookingSection.style.display = 'block';
+        hideLoginForm(); 
     } else {
         invalidLoginDetails.innerText = 'Incorrect username or password! Please try again.'
         setTimeout(() => {
@@ -96,12 +101,11 @@ const fetchUserData = (travelerId) => {
             const bookTripButton = document.querySelector('.nav-book-button');
             bookTripButton.style.display = 'block';
         }
-        hideLoginForm();
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     });
-  };
+};
 
 const populateDestinationOptions = (destinations) => {
     const destinationSelect = document.getElementById('destination');
@@ -155,4 +159,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-export {updatePendingTrips, hideTripRequestForm }
