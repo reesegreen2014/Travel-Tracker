@@ -50,6 +50,24 @@ const updatePastTrips = (trips = [], destinations = []) => {
   }
 };
 
+const updateUpcomingTrips = (trips = [], destinations = []) => {
+  const upcomingTripsElement = document.querySelector('.upcoming-card-DOMUpdates');
+  if (upcomingTripsElement) {
+      const approvedTrips = trips.filter(trip => trip.status === 'approved');
+      if (approvedTrips.length > 0) {
+          const tripLocations = approvedTrips.map(trip => {
+              const destination = destinations.find(dest => dest.id === trip.destinationID);
+              return destination ? destination.destination : 'Unknown';
+          });
+          const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
+          const list = `<ul class="no-bullets">${listItems}</ul>`;
+          upcomingTripsElement.innerHTML = `${list}`;
+      } else {
+          upcomingTripsElement.innerHTML = 'No upcoming trips recorded.';
+      }
+  }
+};
+
 
 const showLoginForm = () => {
   const loginForm = document.getElementById('loginForm');
@@ -90,5 +108,5 @@ const updateContainerHeaders = () => {
 };
 
 
-export { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders }
+export { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders, updateUpcomingTrips }
 

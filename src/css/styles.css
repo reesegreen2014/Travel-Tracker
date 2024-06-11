@@ -238,6 +238,12 @@ footer {
   align-items: center;
 }
 
+.sub-container1, .upcoming-card-DOMUpdates {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
 .sub-container2 .card-DOMUpdates ul {
   list-style-type: none;
   padding: 0;
@@ -252,6 +258,21 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width:  100%;
+}
+
+.no-bullets {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.no-bullets li {
+  margin: 2px; 
 }
 
 .booking-section {

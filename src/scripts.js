@@ -1,7 +1,7 @@
 import './css/styles.css';
 import { fetchData } from './APICalls'; 
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
+import { updateTotalAmountSpent, updatePastTrips, updateUpcomingTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
 import { validateCredentials, extractTravelerId } from './Logic Functions/loginFunctions';
 import { handleTripRequestSubmission } from './Logic Functions/bookingFunctions';
 const baseUrl = 'http://localhost:3001/api/v1';
@@ -80,7 +80,7 @@ const updateWelcomeMessage = (headingText, subheadingText) => {
 
 const fetchUserData = (travelerId) => {
     const currentYear = 2022; 
-
+  
     Promise.all([
         fetchData(`${baseUrl}/trips`),
         fetchData(`${baseUrl}/destinations`),
@@ -91,12 +91,13 @@ const fetchUserData = (travelerId) => {
         const destinations = destinationsData.destinations || [];
         
         const travelerTrips = trips.filter(trip => trip.userID === travelerId);
-        const tripDetails = getTripDetailsForTraveler(travelerId, travelerTrips, destinations);
-
+        const tripDetails = getTripDetailsForTraveler(travelerId, travelerTrips, destinations, currentYear);
+  
         if (tripDetails) {
             updateContainerHeaders(tripDetails);
             updateTotalAmountSpent(travelerTrips, destinations, currentYear); 
             updatePastTrips(tripDetails.pastTrips, destinations);
+            updateUpcomingTrips(tripDetails.upcomingTrips, destinations)
             updatePendingTrips(travelerTrips, destinations, travelerId); 
             const bookTripButton = document.querySelector('.nav-book-button');
             bookTripButton.style.display = 'block';
@@ -106,7 +107,7 @@ const fetchUserData = (travelerId) => {
     .catch(error => {
         console.error('Error fetching data:', error);
     });
-};
+  };
 
 const populateDestinationOptions = (destinations) => {
     const destinationSelect = document.getElementById('destination');
