@@ -15,14 +15,30 @@ nav {
   height: 120px;
 }
 
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .header-text {
   color: #004080; 
   margin: 0;
   font-size: 50px;
+  margin-bottom: 0px;
   padding-left: 10px;
   font-family: "Teko", sans-serif;
   font-weight: 400;
   font-style: oblique;
+}
+
+.date-text {
+  color: #E35D6A;
+  margin: 0;
+  font-weight: 250px;
+  padding-left: 10px;
+  font-size: 20px;
+  font-family: "Teko", sans-serif;
 }
 
 .welcome-message { 
@@ -40,7 +56,13 @@ nav {
   word-spacing: 20px;
   position: relative; 
   display: inline-block;
+  transition: transform 0.3s ease;
 }
+
+.trip-message:hover {
+  transform: scale(1.20); 
+}
+
 
 .trip-message::after {
   content: '';
@@ -96,7 +118,13 @@ nav {
   justify-content: center;
   text-align: center;
   padding: 10px;
+  transition: transform 0.3s ease; 
 }
+
+.sub-container1:hover, .sub-container2:hover, .sub-container3:hover, .sub-container4:hover {
+  transform: scale(1.20); 
+}
+
 
 .sub-container3 ul {
   list-style-type: none;
@@ -106,13 +134,6 @@ nav {
   flex-direction: column;
   align-items: center; 
   justify-content: center; 
-}
-
-.vacation-photos {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 5px solid #E35D6A; 
 }
 
 .action-buttons {
@@ -238,6 +259,12 @@ footer {
   align-items: center;
 }
 
+.sub-container1, .upcoming-card-DOMUpdates {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
 .sub-container2 .card-DOMUpdates ul {
   list-style-type: none;
   padding: 0;
@@ -252,6 +279,21 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width:  100%;
+}
+
+.no-bullets {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.no-bullets li {
+  margin: 2px; 
 }
 
 .booking-section {
@@ -282,6 +324,11 @@ footer {
   word-spacing: 20px;
   position: relative; 
   display: inline-block;
+  transition: transform 0.3s ease; 
+}
+
+.book-message:hover {
+  transform: scale(1.20); 
 }
 
 .submit-trip {
@@ -354,4 +401,24 @@ footer {
   flex: 1;
   margin: 10px;
   text-align: left; 
+}
+
+#messageSection { 
+  color:#E35D6A;
+  font-size: 20px;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.invalidLoginDetailsMessage {
+  color: #E35D6A;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+#incompleteFields {
+  color:#E35D6A;
+  font-size: 20px;
+  padding-top: 20px;
+  font-weight: bold;
 }

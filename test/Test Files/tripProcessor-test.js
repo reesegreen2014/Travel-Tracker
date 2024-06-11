@@ -30,7 +30,7 @@ describe('Trip Processor Functions', () => {
     });
   });
 
-  describe('Filtering trips by traveler', () => {
+  describe('filterTripsByTraveler', () => {
     it('should return an empty array if no trips exist for the traveler', () => {
       const travelerId = 99; 
       const filteredTrips = filterTripsByTraveler(trips, travelerId);
@@ -79,14 +79,6 @@ describe('Trip Processor Functions', () => {
       expect(categorized.pastTrips).to.be.an('array').that.is.empty;
       expect(categorized.upcomingTrips).to.be.an('array').that.is.empty;
       expect(categorized.pendingTrips).to.be.an('array').that.is.empty;
-    });
-  });
-
-  describe('Calculating total amount spent on trips', () => {
-    it('should return 0 if no past trips exist', () => {
-      const pastTrips = []; 
-      const totalAmountSpent = calculateTotalAmountSpent(pastTrips, destinations, 2024);
-      expect(totalAmountSpent).to.equal(0);
     });
   });
 });

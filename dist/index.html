@@ -11,7 +11,10 @@
 <body>
     <header tabindex="0">
         <nav>
+          <div class="header-content">
             <h3 class="header-text" tabindex="0">TripTrove</h3>
+            <h4 class="date-text" tabindex="0">Today's Date is 03/01/2022</h4>
+          </div>
             <div class="action-buttons">
               <button class="nav-book-button">Book A Trip!</button>
               <button class="nav-login-button" id="loginButton">Login</button>
@@ -28,6 +31,7 @@
                   </div>
                   <button type="submit" class="sub-menu-login-button" tabindex="0">Login</button>
                 </form>
+                <section class="invalidLoginDetailsMessage" tabindex="0"></section>
               </div>
             </div>
         </nav>
@@ -70,7 +74,7 @@
         <form id="tripRequestFormInner">
             <div class="form-group">
                 <label for="tripDate">Trip Date:</label>
-                <input type="date" id="tripDate" name="tripDate" required>
+                <input type="date" id="tripDate" name="tripDate" min="2022-03-01" required>
             </div>
             <div class="form-group">
                 <label for="duration">Duration (days):</label>
@@ -92,6 +96,8 @@
             </div>
             <button type="button" class="calculate-cost-button">Calculate Cost</button>
             <button type="submit" class="submit-request-button">Submit Request</button>
+            <section id="messageSection" tabindex="0"></section>
+            <section id="incompleteFields" tabindex="0"></section>
         </form>
       </div>
     </section>

@@ -1,36 +1,39 @@
 import './css/styles.css';
 import { fetchData } from './APICalls'; 
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
+import { updateWelcomeMessage, updatePendingTrips, updateTotalAmountSpent, updatePastTrips, updateUpcomingTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
 import { validateCredentials, extractTravelerId } from './Logic Functions/loginFunctions';
 import { handleTripRequestSubmission } from './Logic Functions/bookingFunctions';
+
+//CONSTANTS
 const baseUrl = 'http://localhost:3001/api/v1';
+
+//querySelectors
 const loginButton = document.getElementById('loginButton');
 const bookTripButton = document.querySelector('.nav-book-button');
 const calculateCostButton = document.querySelector('.calculate-cost-button');
 const pendingTripsText = document.querySelector('.pending-card-DOMUpdates');
 const upcomingTripsText = document.querySelector('.upcoming-card-DOMUpdates');
-const upcomingTripsHeader = document.querySelector('.sub-container1 .card-titles');
-const pastTripsHeader = document.querySelector('.sub-container2 .card-titles');
-const pendingTripsHeader = document.querySelector('.sub-container3 .card-titles');
-const amountSpentHeader = document.querySelector('.sub-container4 .card-titles');
 const bookingSection = document.querySelector('.booking-section');
 bookTripButton.style.display = 'none';
 const tripRequestForm = document.getElementById('tripRequestForm')
-const tripMessage = document.querySelector('.trip-message');
-const tripMessageSubContainer = document.querySelector('.sub-container-text');
+
 
 document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const toggleLoginForm = () => {
+        loginForm.classList.toggle('login-form-hidden');
+    };
     loginButton.addEventListener('click', () => {
         const isLoggedIn = loginButton.innerText === 'Logout';
         if (isLoggedIn) {
             handleLogout();
         } else {
-            showLoginForm();
+            toggleLoginForm(); 
         }
     });
 
-    loginFormInner.addEventListener('submit', handleFormSubmission);
+    loginForm.addEventListener('submit', handleFormSubmission);
 
     if (tripRequestForm) {
         tripRequestForm.addEventListener('submit', handleTripRequestSubmission);
@@ -55,6 +58,8 @@ const handleFormSubmission = (event) => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const loginText = document.querySelector('.nav-login-button');
+    const invalidLoginDetails = document.querySelector('.invalidLoginDetailsMessage')
+    invalidLoginDetails.innerText = '';
     if (validateCredentials(username, password)) {
         const travelerId = extractTravelerId(username);
         fetchUserData(travelerId);
@@ -63,19 +68,18 @@ const handleFormSubmission = (event) => {
         pendingTripsText.innerText = `You don't have any pending trips!`;
         upcomingTripsText.innerText = `You don't have any upcoming trips!`;
         bookingSection.style.display = 'block';
+        hideLoginForm(); 
     } else {
-        alert('Invalid username or password');
+        invalidLoginDetails.innerText = 'Incorrect username or password! Please try again.'
+        setTimeout(() => {
+            invalidLoginDetails.innerText = '';
+        }, 5000); 
     }
-};
-
-const updateWelcomeMessage = (headingText, subheadingText) => {
-    tripMessage.innerText = headingText;
-    tripMessageSubContainer.lastElementChild.innerText = subheadingText;
 };
 
 const fetchUserData = (travelerId) => {
     const currentYear = 2022; 
-
+  
     Promise.all([
         fetchData(`${baseUrl}/trips`),
         fetchData(`${baseUrl}/destinations`),
@@ -86,17 +90,17 @@ const fetchUserData = (travelerId) => {
         const destinations = destinationsData.destinations || [];
         
         const travelerTrips = trips.filter(trip => trip.userID === travelerId);
-        const tripDetails = getTripDetailsForTraveler(travelerId, travelerTrips, destinations);
-
+        const tripDetails = getTripDetailsForTraveler(travelerId, travelerTrips, destinations, currentYear);
+  
         if (tripDetails) {
             updateContainerHeaders(tripDetails);
             updateTotalAmountSpent(travelerTrips, destinations, currentYear); 
             updatePastTrips(tripDetails.pastTrips, destinations);
+            updateUpcomingTrips(tripDetails.upcomingTrips, destinations)
             updatePendingTrips(travelerTrips, destinations, travelerId); 
             const bookTripButton = document.querySelector('.nav-book-button');
             bookTripButton.style.display = 'block';
         }
-        hideLoginForm();
     })
     .catch(error => {
         console.error('Error fetching data:', error);
@@ -118,7 +122,8 @@ const calculateEstimatedCost = () => {
     const durationInput = document.getElementById('duration');
     const numTravelersInput = document.getElementById('numTravelers');
     const destinationSelect = document.getElementById('destination');
-
+    const incompleteFields = document.getElementById('incompleteFields')
+    incompleteFields.innerText = '';
     if (tripDateInput.value && durationInput.value && numTravelersInput.value && destinationSelect.value) {
         const numTravelers = parseInt(numTravelersInput.value);
         const duration = parseInt(durationInput.value);
@@ -138,32 +143,11 @@ const calculateEstimatedCost = () => {
                 console.error('Error fetching destination:', error);
             });
     } else {
-        alert('Please fill out all required fields before calculating the cost.');
+        incompleteFields.innerText = 'Please fill out all required fields before calculating the cost.';
+        setTimeout(() => {
+            incompleteFields.innerText = '';
+        }, 3000); 
     }
-};
-
-const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
-    const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
-    if (pendingTripsElement) {
-        const filteredPendingTrips = trips.filter(trip => trip.status === 'pending' && trip.userID === travelerId);
-        if (filteredPendingTrips.length > 0) {
-            pendingTripsElement.innerHTML = '';
-            const tripLocations = filteredPendingTrips.map(trip => {
-                const destination = destinations.find(dest => dest.id === trip.destinationID);
-                return destination ? destination.destination : 'Unknown';
-            });
-            const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join(''); // Correct use of <li>
-            const list = `<ul>${listItems}</ul>`;
-            pendingTripsElement.innerHTML = list; 
-        } else {
-            pendingTripsElement.innerHTML = '<p>No pending trips!</p>'; 
-        }
-    }
-};
-
-const hideTripRequestForm = () => {
-    const tripRequestForm = document.getElementById('tripRequestForm');
-    tripRequestForm.classList.add('trip-request-form-hidden');
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -175,4 +159,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-export {updatePendingTrips, hideTripRequestForm }

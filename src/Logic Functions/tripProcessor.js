@@ -6,7 +6,7 @@ const filterTripsByTraveler = (trips = [], travelerId) => {
 }
 
 const categorizeTrips = (trips) => {
-  const currentDate = new Date();
+  const currentDate = new Date('2022-03-01'); 
   const pastTrips = trips.filter(trip => new Date(trip.date) < currentDate);
   const upcomingTrips = [];
   const pendingTrips = [];
@@ -22,7 +22,6 @@ const categorizeTrips = (trips) => {
 
   return { pastTrips, upcomingTrips, pendingTrips };
 }
-
 const calculateTotalAmountSpent = (pastTrips = [], destinations = [], currentYear) => {
   const agentFee = 0.10;
   let totalAmountSpent = 0;
