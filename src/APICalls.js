@@ -25,7 +25,6 @@ window.onerror = function(error) {
   return true; 
 };
 
-
 function fetchData(url, options = {}) {
   return fetch(url, options)
     .then(response => {
@@ -34,11 +33,15 @@ function fetchData(url, options = {}) {
       }
       return response.json();
     })
-    .catch(handleFetchError) 
-    .finally(() => {
+    .catch(handleFetchError)
+    .then(result => {
       console.log('Fetch attempt finished.');
+      return result;
+    }, error => {
+      console.log('Fetch attempt finished.');
+      throw error;
     });
-}
+};
 
 //FETCH REQUESTS
 fetchData('http://localhost:3001/api/v1/travelers')
