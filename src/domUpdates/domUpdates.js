@@ -121,7 +121,7 @@ const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
               const destination = destinations.find(dest => dest.id === trip.destinationID);
               return destination ? destination.destination : 'Unknown';
           });
-          const listItems = tripLocations.map(location => `<ul class="API-location">${location}</ul>`).join(''); // Correct use of <li>
+          const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join('');
           const list = `<ul>${listItems}</ul>`;
           pendingTripsElement.innerHTML = list; 
       } else {
