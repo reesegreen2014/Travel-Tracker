@@ -1,7 +1,7 @@
 import './css/styles.css';
 import { fetchData } from './APICalls'; 
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateWelcomeMessage, updatePendingTrips, hideTripRequestForm, updateTotalAmountSpent, updatePastTrips, updateUpcomingTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
+import { updateWelcomeMessage, updatePendingTrips, updateTotalAmountSpent, updatePastTrips, updateUpcomingTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
 import { validateCredentials, extractTravelerId } from './Logic Functions/loginFunctions';
 import { handleTripRequestSubmission } from './Logic Functions/bookingFunctions';
 
