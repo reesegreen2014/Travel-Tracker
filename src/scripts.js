@@ -1,24 +1,23 @@
 import './css/styles.css';
 import { fetchData } from './APICalls'; 
 import { getTripDetailsForTraveler } from './Logic Functions/tripProcessor';
-import { updateTotalAmountSpent, updatePastTrips, updateUpcomingTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
+import { updateWelcomeMessage, updatePendingTrips, hideTripRequestForm, updateTotalAmountSpent, updatePastTrips, updateUpcomingTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders } from './domUpdates/domUpdates';
 import { validateCredentials, extractTravelerId } from './Logic Functions/loginFunctions';
 import { handleTripRequestSubmission } from './Logic Functions/bookingFunctions';
+
+//CONSTANTS
 const baseUrl = 'http://localhost:3001/api/v1';
+
+//querySelectors
 const loginButton = document.getElementById('loginButton');
 const bookTripButton = document.querySelector('.nav-book-button');
 const calculateCostButton = document.querySelector('.calculate-cost-button');
 const pendingTripsText = document.querySelector('.pending-card-DOMUpdates');
 const upcomingTripsText = document.querySelector('.upcoming-card-DOMUpdates');
-const upcomingTripsHeader = document.querySelector('.sub-container1 .card-titles');
-const pastTripsHeader = document.querySelector('.sub-container2 .card-titles');
-const pendingTripsHeader = document.querySelector('.sub-container3 .card-titles');
-const amountSpentHeader = document.querySelector('.sub-container4 .card-titles');
 const bookingSection = document.querySelector('.booking-section');
 bookTripButton.style.display = 'none';
 const tripRequestForm = document.getElementById('tripRequestForm')
-const tripMessage = document.querySelector('.trip-message');
-const tripMessageSubContainer = document.querySelector('.sub-container-text');
+
 
 document.addEventListener('DOMContentLoaded', () => {
     loginButton.addEventListener('click', () => {
@@ -71,11 +70,6 @@ const handleFormSubmission = (event) => {
             invalidLoginDetails.innerText = '';
         }, 5000); 
     }
-};
-
-const updateWelcomeMessage = (headingText, subheadingText) => {
-    tripMessage.innerText = headingText;
-    tripMessageSubContainer.lastElementChild.innerText = subheadingText;
 };
 
 const fetchUserData = (travelerId) => {
@@ -150,30 +144,6 @@ const calculateEstimatedCost = () => {
             incompleteFields.innerText = '';
         }, 3000); 
     }
-};
-
-const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
-    const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
-    if (pendingTripsElement) {
-        const filteredPendingTrips = trips.filter(trip => trip.status === 'pending' && trip.userID === travelerId);
-        if (filteredPendingTrips.length > 0) {
-            pendingTripsElement.innerHTML = '';
-            const tripLocations = filteredPendingTrips.map(trip => {
-                const destination = destinations.find(dest => dest.id === trip.destinationID);
-                return destination ? destination.destination : 'Unknown';
-            });
-            const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join(''); // Correct use of <li>
-            const list = `<ul>${listItems}</ul>`;
-            pendingTripsElement.innerHTML = list; 
-        } else {
-            pendingTripsElement.innerHTML = '<p>No pending trips!</p>'; 
-        }
-    }
-};
-
-const hideTripRequestForm = () => {
-    const tripRequestForm = document.getElementById('tripRequestForm');
-    tripRequestForm.classList.add('trip-request-form-hidden');
 };
 
 document.addEventListener("DOMContentLoaded", function() {

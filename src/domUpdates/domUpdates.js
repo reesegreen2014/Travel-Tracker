@@ -1,5 +1,4 @@
 import { calculateTotalAmountSpent } from "../Logic Functions/tripProcessor";
-import { hideTripRequestForm } from "../scripts";
 
 //querySelectors
 const totalAmountSpentElement = document.querySelector('.sub-container4 .card-DOMUpdates')
@@ -107,6 +106,34 @@ const updateContainerHeaders = () => {
   amountSpentHeader.textContent = 'Amount Spent This year';
 };
 
+const updateWelcomeMessage = (headingText, subheadingText) => {
+  tripMessage.innerText = headingText;
+  tripMessageSubContainer.lastElementChild.innerText = subheadingText;
+};
 
-export { updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders, updateUpcomingTrips }
+const updatePendingTrips = (trips = [], destinations = [], travelerId) => {
+  const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
+  if (pendingTripsElement) {
+      const filteredPendingTrips = trips.filter(trip => trip.status === 'pending' && trip.userID === travelerId);
+      if (filteredPendingTrips.length > 0) {
+          pendingTripsElement.innerHTML = '';
+          const tripLocations = filteredPendingTrips.map(trip => {
+              const destination = destinations.find(dest => dest.id === trip.destinationID);
+              return destination ? destination.destination : 'Unknown';
+          });
+          const listItems = tripLocations.map(location => `<li class="API-location">${location}</li>`).join(''); // Correct use of <li>
+          const list = `<ul>${listItems}</ul>`;
+          pendingTripsElement.innerHTML = list; 
+      } else {
+          pendingTripsElement.innerHTML = '<p>No pending trips!</p>'; 
+      }
+  }
+};
+
+const hideTripRequestForm = () => {
+  const tripRequestForm = document.getElementById('tripRequestForm');
+  tripRequestForm.classList.add('trip-request-form-hidden');
+};
+
+export { updateWelcomeMessage, hideTripRequestForm, updatePendingTrips, updateTotalAmountSpent, updatePastTrips, showLoginForm, hideLoginForm, handleLogout, updateContainerHeaders, updateUpcomingTrips }
 
