@@ -29,7 +29,10 @@ const handleTripRequestSubmission = (event) => {
         .then(data => {
             if (data) {
                 console.log('Trip request submitted successfully:', data);
-                submitMessage.innerText = 'Your trip request has been submitted and is pending approval!'
+                submitMessage.innerText = 'Your trip request has been submitted and is pending approval! Craving more adventure? Book another!'
+                setTimeout(() => {
+                    submitMessage.innerText = '';
+                }, 5000);
                 const pendingTripsElement = document.querySelector('.pending-card-DOMUpdates');
                 if (pendingTripsElement) {
                     if (pendingTripsElement.textContent === 'No pending trips!') {
