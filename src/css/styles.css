@@ -40,7 +40,13 @@ nav {
   word-spacing: 20px;
   position: relative; 
   display: inline-block;
+  transition: transform 0.3s ease;
 }
+
+.trip-message:hover {
+  transform: scale(1.20); 
+}
+
 
 .trip-message::after {
   content: '';
@@ -96,7 +102,13 @@ nav {
   justify-content: center;
   text-align: center;
   padding: 10px;
+  transition: transform 0.3s ease; 
 }
+
+.sub-container1:hover, .sub-container2:hover, .sub-container3:hover, .sub-container4:hover {
+  transform: scale(1.20); 
+}
+
 
 .sub-container3 ul {
   list-style-type: none;
@@ -106,13 +118,6 @@ nav {
   flex-direction: column;
   align-items: center; 
   justify-content: center; 
-}
-
-.vacation-photos {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 5px solid #E35D6A; 
 }
 
 .action-buttons {
@@ -303,6 +308,11 @@ footer {
   word-spacing: 20px;
   position: relative; 
   display: inline-block;
+  transition: transform 0.3s ease; 
+}
+
+.book-message:hover {
+  transform: scale(1.20); 
 }
 
 .submit-trip {
