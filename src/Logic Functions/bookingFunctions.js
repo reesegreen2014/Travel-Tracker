@@ -1,6 +1,5 @@
 import { postTripRequest } from "../APICalls";
 import { extractTravelerId } from "./loginFunctions";
-import { updatePendingTrips } from "../scripts";
 
 const handleTripRequestSubmission = (event) => {
     event.preventDefault();
@@ -8,7 +7,6 @@ const handleTripRequestSubmission = (event) => {
     const duration = parseInt(document.getElementById('duration').value);
     const numTravelers = parseInt(document.getElementById('numTravelers').value);
     const destinationId = parseInt(document.getElementById('destination').value);
-    const estimatedCost = parseFloat(document.getElementById('estimatedCost').value.replace('$', ''));
     const username = document.getElementById('username').value;
     const userID = extractTravelerId(username);
     const submitMessage = document.getElementById('messageSection')
