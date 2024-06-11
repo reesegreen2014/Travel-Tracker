@@ -55,6 +55,8 @@ const handleFormSubmission = (event) => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const loginText = document.querySelector('.nav-login-button');
+    const invalidLoginDetails = document.querySelector('.invalidLoginDetailsMessage')
+    invalidLoginDetails.innerText = '';
     if (validateCredentials(username, password)) {
         const travelerId = extractTravelerId(username);
         fetchUserData(travelerId);
@@ -64,7 +66,10 @@ const handleFormSubmission = (event) => {
         upcomingTripsText.innerText = `You don't have any upcoming trips!`;
         bookingSection.style.display = 'block';
     } else {
-        alert('Invalid username or password');
+        invalidLoginDetails.innerText = 'Incorrect username or password! Please try again.'
+        setTimeout(() => {
+            invalidLoginDetails.innerText = '';
+        }, 5000); 
     }
 };
 
@@ -118,7 +123,8 @@ const calculateEstimatedCost = () => {
     const durationInput = document.getElementById('duration');
     const numTravelersInput = document.getElementById('numTravelers');
     const destinationSelect = document.getElementById('destination');
-
+    const incompleteFields = document.getElementById('incompleteFields')
+    incompleteFields.innerText = '';
     if (tripDateInput.value && durationInput.value && numTravelersInput.value && destinationSelect.value) {
         const numTravelers = parseInt(numTravelersInput.value);
         const duration = parseInt(durationInput.value);
@@ -138,7 +144,10 @@ const calculateEstimatedCost = () => {
                 console.error('Error fetching destination:', error);
             });
     } else {
-        alert('Please fill out all required fields before calculating the cost.');
+        incompleteFields.innerText = 'Please fill out all required fields before calculating the cost.';
+        setTimeout(() => {
+            incompleteFields.innerText = '';
+        }, 3000); 
     }
 };
 

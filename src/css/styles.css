@@ -355,3 +355,23 @@ footer {
   margin: 10px;
   text-align: left; 
 }
+
+#messageSection { 
+  color:#E35D6A;
+  font-size: 20px;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.invalidLoginDetailsMessage {
+  color: #E35D6A;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+#incompleteFields {
+  color:#E35D6A;
+  font-size: 20px;
+  padding-top: 20px;
+  font-weight: bold;
+}
